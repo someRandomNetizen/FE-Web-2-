@@ -1,0 +1,93 @@
+.container {
+    max-width: 6xl;
+    margin: 0 auto;
+    padding: 4px;
+  }
+  
+  .section {
+    padding: 12px 0;
+    border-top: 1px solid #888;
+  }
+  
+  .section-header {
+    max-width: 3xl;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 12px;
+  }
+  
+  .tag {
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 1px 3px;
+    margin: 2px;
+    color: #06B6D4;
+    background-color: #C6F6D5;
+    border-radius: 9999px;
+    margin-bottom: 4px;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    color: #A0AEC0;
+    margin-bottom: 24px;
+  }
+  
+  .item {
+    display: grid;
+    gap: 20px;
+  }
+  
+  .item-image {
+    max-width: 540px;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+  }
+  
+  .item-content {
+    max-width: 540px;
+  }
+  
+  .item-heading {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 18px;
+    color: #9F7AEA;
+    margin-bottom: 8px;
+  }
+  
+  .item-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .item-description {
+    font-size: 18px;
+    color: #A0AEC0;
+    margin-bottom: 24px;
+  }
+  
+  .item-list {
+    font-size: 16px;
+    color: #A0AEC0;
+    margin-bottom: -8px;
+  }
+  
+  .item-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .item-list li svg {
+    width: 12px;
+    height: 12px;
+    fill: #48BB78;
+    margin-right: 8px;
+  }
