@@ -53,7 +53,7 @@
 // export default Newsletter;
 
 import React from "react";
-import GoogleMap from "./Map";
+import GoogleMap from "../component/Map";
 
 function Newsletter() {
   return (

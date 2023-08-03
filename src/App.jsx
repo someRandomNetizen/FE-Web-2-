@@ -1,18 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, StrictMode } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import "aos/dist/aos.css";
 import "./css/style.css";
 
 import AOS from "aos";
-
+import { Provider } from "react-redux";
 import Home from "./pages/Home";
+import FindOrder from "./pages/FindOrder";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import ResetPassword from "./pages/ResetPassword";
 
-function App() {
+import store from "./store/store";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+function App({ persistor, basename }) {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     AOS.init({
@@ -31,12 +38,17 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-      </Routes>
+      <StrictMode>
+        <Provider store={store}>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/findorder" element={<FindOrder />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+          </Routes>
+        </Provider>
+      </StrictMode>
     </>
   );
 }
