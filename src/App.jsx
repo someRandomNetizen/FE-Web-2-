@@ -16,10 +16,10 @@ import store from "./store/store";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 function App({ persistor, basename }) {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const user = useSelector((state) => state.auth.user);
+  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  // const user = useSelector((state) => state.auth.user);
+  // const dispatch = useDispatch();
   const location = useLocation();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     AOS.init({

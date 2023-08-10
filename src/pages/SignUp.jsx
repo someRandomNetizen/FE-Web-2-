@@ -1,15 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import Header from "../partials/Header";
 import PageIllustration from "../partials/PageIllustration";
 import Banner from "../partials/Banner";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginSuccess, logout } from "../actions/authActions";
 
 function SignUp() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    phone_number: "0778544413",
-    password: "Qwe123!@#",
+    full_name: "",
+    user_name: "",
+    phone_number: "",
+    password: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,15 +26,17 @@ function SignUp() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     // Access the form data in the formData state
-    const { phone_number, password } = formData;
+    const { full_name, user_name, phone_number, password } = formData;
     // Do something with the form data (e.g., send it to a server, perform validation, etc.)
-    console.log("Phone:", phone_number);
-    console.log("Password:", password);
+    console.log("full_name:", full_name);
+    console.log("user_name:", user_name);
+    console.log("phone_number:", phone_number);
+    console.log("password:", password);
     // You can add your logic here to handle form submission, such as making API requests.
     try {
       const response = await axios.post(
-        "https://365truck.fdssoft.com/api/auth/loginDriver",
-        { phone_number, password }
+        "https://365truck.fdssoft.com/api/auth/regUser",
+        { full_name, user_name, phone_number, password }
       );
 
       if (response.status === 201) {
@@ -106,7 +113,7 @@ function SignUp() {
                     aria-hidden="true"
                   ></div>
                 </div>
-                <form>
+                <form onSubmit={handleSignUp}>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label
@@ -118,8 +125,11 @@ function SignUp() {
                       <input
                         id="full-name"
                         type="text"
+                        name="full_name"
                         className="form-input w-full text-gray-300"
                         placeholder="First and last name"
+                        value={formData.full_name}
+                        onChange={handleChange}
                         required
                       />
                     </div>
@@ -128,15 +138,18 @@ function SignUp() {
                     <div className="w-full px-3">
                       <label
                         className="block text-gray-300 text-sm font-medium mb-1"
-                        htmlFor="company-name"
+                        htmlFor="email"
                       >
-                        Company Name <span className="text-red-600">*</span>
+                        Email <span className="text-red-600">*</span>
                       </label>
                       <input
-                        id="company-name"
+                        id="user-name"
                         type="text"
+                        name="user_name"
                         className="form-input w-full text-gray-300"
-                        placeholder="Your company or app name"
+                        placeholder="Choose a user name"
+                        value={formData.user_name}
+                        onChange={handleChange}
                         required
                       />
                     </div>
@@ -151,9 +164,12 @@ function SignUp() {
                       </label>
                       <input
                         id="number"
-                        type="number"
+                        type="tel" // Using "tel" type for phone numbers
+                        name="phone_number"
                         className="form-input w-full text-gray-300"
                         placeholder="Your phone number"
+                        value={formData.phone_number}
+                        onChange={handleChange}
                         required
                       />
                     </div>
@@ -169,13 +185,24 @@ function SignUp() {
                       <input
                         id="password"
                         type="password"
+                        name="password"
                         className="form-input w-full text-gray-300"
                         placeholder="Password (at least 10 characters)"
+                        value={formData.password}
+                        onChange={handleChange}
                         required
                       />
                     </div>
                   </div>
                   <div className="text-sm text-gray-500 text-center">
+                    I agree to be contacted by Open PRO about this offer as per
+                    the Open PRO{" "}
+                    <span className="underline text-gray-400">
+                      Privacy Policy
+                    </span>
+                    .
+                  </div>
+                  {/* <div className="text-sm text-gray-500 text-center">
                     I agree to be contacted by Open PRO about this offer as per
                     the Open PRO{" "}
                     <Link
@@ -185,7 +212,7 @@ function SignUp() {
                       Privacy Policy
                     </Link>
                     .
-                  </div>
+                  </div> */}
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
                       <button className="btn text-white bg-purple-600 hover:bg-purple-700 w-full">

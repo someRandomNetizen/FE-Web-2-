@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import Modal from '../utils/Modal';
+import React, { useState, useRef, useEffect } from "react";
+import Modal from "../utils/Modal";
 
-import HeroImage from '../images/hero-image-01.jpg';
+import HeroImage from "../images/hero-image-01.jpg";
 
 function HeroHome() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -9,7 +9,7 @@ function HeroHome() {
 
   useEffect(() => {
     videoModalOpen ? video.current.play() : video.current.pause();
-  }, [videoModalOpen]);    
+  }, [videoModalOpen]);
 
   return (
     <section>
@@ -21,9 +21,23 @@ function HeroHome() {
           data-aos="fade-up"
           data-aos-delay="400"
         >
-          <svg className="max-w-full" width="564" height="552" viewBox="0 0 564 552" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            className="max-w-full"
+            width="564"
+            height="552"
+            viewBox="0 0 564 552"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <defs>
-              <linearGradient id="illustration-02" x1="-3.766" y1="300.204" x2="284.352" y2="577.921" gradientUnits="userSpaceOnUse">
+              <linearGradient
+                id="illustration-02"
+                x1="-3.766"
+                y1="300.204"
+                x2="284.352"
+                y2="577.921"
+                gradientUnits="userSpaceOnUse"
+              >
                 <stop stopColor="#5D5DFF" stopOpacity=".01" />
                 <stop offset="1" stopColor="#5D5DFF" stopOpacity=".32" />
               </linearGradient>
@@ -42,20 +56,32 @@ function HeroHome() {
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
             <h1 className="h1 mb-4" data-aos="fade-up">
-              Landing template for startups
+              Giải pháp thợ cho bạn
             </h1>
-            <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">
-              Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.
+            <p
+              className="text-xl text-gray-400 mb-8"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              Với phương trâm phục vụ khách hàng là trên hết, chúng tôi luôn cố
+              gắng hoàn thiện chính mình. Để mang đến sự hài lòng cũng như phục
+              vụ tốt nhất cho tất cả khách hàng.
             </p>
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div data-aos="fade-up" data-aos-delay="400">
-                <a className="btn text-white bg-purple-600 hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">
-                  Start free trial
+                <a
+                  className="btn text-white bg-purple-600 hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0"
+                  href="#0"
+                >
+                  Tìm kiếm
                 </a>
               </div>
               <div data-aos="fade-up" data-aos-delay="600">
-                <a className="btn text-white bg-gray-700 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#0">
-                  Learn more
+                <a
+                  className="btn text-white bg-gray-700 hover:bg-gray-800 w-full sm:w-auto sm:ml-4"
+                  href="#0"
+                >
+                  Điện lạnh
                 </a>
               </div>
             </div>
@@ -63,8 +89,18 @@ function HeroHome() {
 
           {/* Hero image */}
           <div>
-            <div className="relative flex justify-center items-center" data-aos="fade-up" data-aos-delay="200">
-              <img className="mx-auto" src={HeroImage} width="1024" height="504" alt="Hero" />
+            <div
+              className="relative flex justify-center items-center"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <img
+                className="mx-auto"
+                src={HeroImage}
+                width="1024"
+                height="504"
+                alt="Hero"
+              />
               <a
                 className="absolute group"
                 href="#0"
@@ -81,7 +117,13 @@ function HeroHome() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <defs>
-                    <linearGradient x1="78.169%" y1="9.507%" x2="24.434%" y2="90.469%" id="a">
+                    <linearGradient
+                      x1="78.169%"
+                      y1="9.507%"
+                      x2="24.434%"
+                      y2="90.469%"
+                      id="a"
+                    >
                       <stop stopColor="#EBF1F5" stopOpacity=".8" offset="0%" />
                       <stop stopColor="#EBF1F5" offset="100%" />
                     </linearGradient>
@@ -96,9 +138,22 @@ function HeroHome() {
             </div>
 
             {/* Modal */}
-            <Modal id="modal" ariaLabel="modal-headline" show={videoModalOpen} handleClose={() => setVideoModalOpen(false)}>
+            <Modal
+              id="modal"
+              ariaLabel="modal-headline"
+              show={videoModalOpen}
+              handleClose={() => setVideoModalOpen(false)}
+            >
               <div className="relative pb-9/16">
-                <video ref={video} className="absolute w-full h-full" width="1920" height="1080" loop autoPlay controls>
+                <video
+                  ref={video}
+                  className="absolute w-full h-full"
+                  width="1920"
+                  height="1080"
+                  loop
+                  autoPlay
+                  controls
+                >
                   <source src="/videos/video.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>

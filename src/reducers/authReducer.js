@@ -1,9 +1,10 @@
 // src/reducers/authReducer.js
-import { LOGIN_SUCCESS, LOGOUT } from '../actions/authActions';
+import { LOGIN_SUCCESS, LOGOUT, FIND } from '../actions/authActions';
 
 const initialState = {
   isAuthenticated: false,
   user: null,
+  find: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -19,6 +20,12 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: false,
         user: null,
+      };
+      case FIND:
+      return {
+        ...state,
+        find: true,
+
       };
     default:
       return state;

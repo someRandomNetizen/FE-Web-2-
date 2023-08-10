@@ -5,11 +5,14 @@ import Header from "../partials/Header";
 import PageIllustration from "../partials/PageIllustration";
 import Banner from "../partials/Banner";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginSuccess, logout } from "../actions/authActions";
 
 function SignIn() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    phone_number: "0778544413",
+    user_name: "admin3@gmail.com",
     password: "Qwe123!@#",
   });
 
@@ -26,11 +29,35 @@ function SignIn() {
   const handleSignIn = async (e) => {
     e.preventDefault();
     // Access the form data in the formData state
-    const { phone_number, password } = formData;
+    const { user_name, password } = formData;
     // Do something with the form data (e.g., send it to a server, perform validation, etc.)
-    console.log("Phone:", phone_number);
+    console.log("user_name:", user_name);
     console.log("Password:", password);
     // You can add your logic here to handle form submission, such as making API requests.
+    try {
+      const response = await axios.post(
+        "https://365truck.fdssoft.com/api/auth/loginUser",
+        { user_name, password }
+      );
+
+      if (response.status === 201) {
+        console.log("Login successful:", response.data);
+        dispatch(loginSuccess({ id: 1, name: "John Doe" }));
+        console.log("accessToken: ", response.data.access_token);
+        localStorage.setItem("JWT", response.data.access_token);
+        const storedToken = localStorage.getItem("JWT");
+        console.log("accessToken2: ", storedToken);
+        // Navigate to "/" after successful login
+        navigate("/"); // This will redirect the user to the "/" route
+      } else {
+        console.log("Login failed:", response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+
+    const phone_number = user_name;
+
     try {
       const response = await axios.post(
         "https://365truck.fdssoft.com/api/auth/loginDriver",
@@ -39,7 +66,11 @@ function SignIn() {
 
       if (response.status === 201) {
         console.log("Login successful:", response.data);
-
+        dispatch(loginSuccess({ id: 1, name: "John Doe" }));
+        console.log("accessToken: ", response.data.access_token);
+        localStorage.setItem("JWT", response.data.access_token);
+        const storedToken = localStorage.getItem("JWT");
+        console.log("accessToken2: ", storedToken);
         // Navigate to "/" after successful login
         navigate("/"); // This will redirect the user to the "/" route
       } else {
@@ -119,16 +150,16 @@ function SignIn() {
                         className="block text-gray-300 text-sm font-medium mb-1"
                         htmlFor="number"
                       >
-                        Phone Number
+                        Username
                       </label>
                       <input
                         id="number"
-                        type="number"
-                        name="number" // Set the name attribute to identify this input in the state
+                        type="text" // Use text type for Username
+                        name="user_name" // Match the name attribute with the formData state property
                         className="form-input w-full text-gray-300"
-                        placeholder="Phone Number"
-                        value={formData.phone_number} // Set the value to the corresponding state value
-                        onChange={handleChange} // Handle changes to the input
+                        placeholder="Username"
+                        value={formData.user_name}
+                        onChange={handleChange}
                         required
                       />
                     </div>

@@ -12,6 +12,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "aos": "^3.0.0-beta.6",
     "axios": "^1.4.0",
+    "google-map-react": "^2.2.1",
     "google-maps-react": "^2.0.6",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
@@ -22,6 +23,7 @@
     "react-simple-widgets": "^6.7.0",
     "react-transition-group": "^4.4.5",
     "redux": "^4.2.1",
+    "socket.io-client": "^4.7.2",
     "use-places-autocomplete": "^4.0.0"
   },
   "devDependencies": {

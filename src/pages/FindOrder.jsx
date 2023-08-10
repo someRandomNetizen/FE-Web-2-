@@ -166,15 +166,18 @@ import Header from "../partials/Header";
 import PageIllustration from "../partials/PageIllustration";
 import Banner from "../partials/Banner";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Map2 from "../component/Map2";
+import { find } from "../actions/authActions";
+import socketIO from "socket.io-client";
 
 function FindOrder() {
   const [address, setAddress] = useState("");
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
@@ -194,7 +197,34 @@ function FindOrder() {
         console.error("Error fetching search results:", error);
       });
   };
+  const socket = socketIO("https://365truck.fdssoft.com", {
+    path: "/api/socket",
+  });
 
+  const [joined, setJoined] = useState(false);
+  const [name, setName] = useState("Brutus");
+
+  socket.emit("join", { name }, () => {
+    console.log("travis2");
+    setJoined(true);
+  });
+
+  const isFind = useSelector((state) => state.auth.find);
+
+  const handleClick = () => {
+    dispatch(find());
+    // This function will be called when the button is clicked
+
+    console.log("is find: ", isFind);
+    console.log("Button clicked!");
+    // Add any other logic or actions you want to perform here
+  };
+  const buttonStyle = {
+    border: "1px solid blue",
+    marginTop: 60,
+    width: 70,
+    // Add any other styles you want here
+  };
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/* <Header /> */}
@@ -240,9 +270,56 @@ function FindOrder() {
       </div> */}
 
       <Map2 />
+      <button onClick={handleClick} style={buttonStyle}>
+        Click Me
+      </button>
     </div>
   );
 }
 
 export default FindOrder;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// var userName = "abc";
+// const [isAccepted, setIsAccepted] = useState(false);
+// const [isDenied, setIsDenied] = useState(false);
+
+// const handleAccept = () => {
+//   setIsAccepted(true);
+//   onAccept();
+// };
+
+// const handleDeny = () => {
+//   setIsDenied(true);
+//   onDeny();
+// };
+
+// if (isAccepted) {
+//   return (
+//     <div className="notification accepted">
+//       You have accepted the shipment order from {userName}.
+//     </div>
+//   );
+// }
+
+// if (isDenied) {
+//   return (
+//     <div className="notification denied">
+//       You have denied the shipment order from {userName}.
+//     </div>
+//   );
+// }
+
+// return (
+//   <div className="notification">
+//     <p>{userName} has chosen you for their shipment order.</p>
+//     <div className="button-container">
+//       <button className="accept-button" onClick={handleAccept}>
+//         Accept
+//       </button>
+//       <button className="deny-button" onClick={handleDeny}>
+//         Deny
+//       </button>
+//     </div>
+//   </div>
+// );
