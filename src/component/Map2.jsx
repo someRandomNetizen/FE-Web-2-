@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -6,6 +6,7 @@ import {
   useJsApiLoader,
   InfoWindowF,
 } from "@react-google-maps/api";
+import axios from "axios";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -19,8 +20,10 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import { useSelector } from "react-redux";
-
 import { debounce } from "lodash";
+import { useDispatch } from "react-redux";
+import socketIO from "socket.io-client";
+import { recShipment } from "../actions/authActions";
 
 export default function Map2() {
   const { isLoaded } = useLoadScript({
@@ -28,9 +31,30 @@ export default function Map2() {
     libraries: ["places"],
   });
 
+  const dispatch = useDispatch();
+
+  const dumdum = useSelector((state) => state.auth.driverID.driver_id);
+
+  socket.on("recShipment", ({ state, driver_id, user_id, shipment_id }) => {
+    if (dumdum == driver_id) {
+      dispatch(recShipment());
+      console.log("Test socket on:", driver_id);
+    }
+  });
+
+  console.log("beautiful2:", dumdum);
+
   if (!isLoaded) return <div>Loading...</div>;
   return <Map />;
 }
+
+const socket = socketIO("https://365truck.fdssoft.com", {
+  path: "/api/socket",
+});
+
+socket.emit("join", {}, () => {
+  console.log("This has join socket room");
+});
 
 const mapContainerStyle = {
   width: "75%",
@@ -43,8 +67,39 @@ const initialCenter = {
   lat: 10.780668,
   lng: 106.724249,
 };
+var manyCoordinate = {};
+var manyCoordinate5 = {};
+var manyCoordinate10 = {};
+const getAllPath = async (lat, long) => {
+  try {
+    const response = await axios.post(
+      "https://365truck.fdssoft.com/api/findAllPathFromInput",
+      { lat, long }
+    );
+
+    if (response.status === 201) {
+      console.log("successful:", response.data);
+      manyCoordinate = response.data;
+
+      // Navigate to "/" after successful login
+      //navigate("/"); // This will redirect the user to the "/" route
+    } else {
+      console.log("failed:", response.status, response.statusText);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+  console.log("kewk", manyCoordinate);
+  manyCoordinate5 = manyCoordinate.filter((coord) => coord.distance <= 5);
+  console.log("beauty", manyCoordinate5);
+  manyCoordinate10 = manyCoordinate.filter((coord) => coord.distance <= 10);
+  console.log("beauty 10", manyCoordinate10);
+};
 
 function Map() {
+  const dumdum = useSelector((state) => state.auth.driverID.driver_id);
+  console.log("beautiful:", dumdum);
+
   //let key = "AIzaSyBSdec1YbDtXb9kM9wkEk10nxW4CmOy6Dc";
   let key = "AIzaSyA759T_2b8Vd9KPputmQ8AslLcuGwARXMU";
 
@@ -81,33 +136,17 @@ function Map() {
   console.log(isLoaded);
 
   //const center = useMemo(() => ({ lat: 43.45, lng: -80.49 }), []);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState({
+    lat: "10.776176",
+    lng: "106.726606",
+  });
+
+  console.log("result coord: ", selected);
 
   const isFind = useSelector((state) => state.auth.find);
-  console.log("is find: ", isFind);
-
-  const manyCoordinate = [
-    {
-      name: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      latitude: 10.779941,
-      longitude: 106.723171,
-    },
-    {
-      name: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      latitude: 10.780405,
-      longitude: 106.725824,
-    },
-    { title: "Target 1", latitude: 10.871811, longitude: 106.803505 },
-    { title: "Target 1", latitude: 10.869166, longitude: 106.80211 },
-    { title: "Target 1", latitude: 10.870754, longitude: 106.80364 },
-    { title: "Target 1", latitude: 10.87016, longitude: 106.805311 },
-    { title: "Target 1", latitude: 10.869605, longitude: 106.801352 },
-    { title: "Target 1", latitude: 10.871145, longitude: 106.802728 },
-    { title: "Target 1", latitude: 10.87059, longitude: 106.801545 },
-    { title: "Target 1", latitude: 10.871877, longitude: 106.802869 },
-    { title: "Target 1", latitude: 10.870236, longitude: 106.805979 },
-    { title: "Target 1", latitude: 10.871372, longitude: 106.805478 },
-  ];
+  const isFind5 = useSelector((state) => state.auth.find5);
+  const isFind10 = useSelector((state) => state.auth.find10);
+  console.log("is find: ", isFind5);
 
   const [selectedMarker, setSelectedMarker] = useState(null);
 
@@ -128,6 +167,45 @@ function Map() {
     setSelectedMarker(null); // Close the InfoWindow after proceeding
   };
 
+  useEffect(() => {
+    if (selected) {
+      getAllPath(selected.lat, selected.lng);
+    }
+  }, [selected]);
+
+  console.log("Test 2222: ");
+
+  const handleUserChosenMarker = (coord0) => {
+    console.log("sir: ", coord0);
+    console.log("sir: ", coord0.lat);
+    console.log("Here come the magic:", dumdum);
+    console.log(dumdum);
+
+    const matchingCoordinate = manyCoordinate.find((coord) => {
+      return coord.latitude === coord0.lat && coord.longitude === coord0.lng;
+    });
+
+    socket.emit(
+      "recShipment",
+      {
+        state: 0,
+        driver_id: matchingCoordinate.driver_id,
+        user_id: 1,
+        shipment_id: 1,
+      },
+      (response) => {
+        console.log("Shipment update successful:", response);
+      }
+    );
+
+    if (matchingCoordinate) {
+      console.log("Matching coordinate found:", matchingCoordinate.driver_id);
+      // You can perform further actions with the matching coordinate here
+    } else {
+      console.log("No matching coordinate found.");
+    }
+  };
+
   return (
     <>
       <div className="places-container">
@@ -144,6 +222,40 @@ function Map() {
       >
         {isFind
           ? manyCoordinate.map((coordinate, index) => (
+              <Marker
+                key={index}
+                position={{
+                  lat: coordinate.latitude,
+                  lng: coordinate.longitude,
+                }}
+                icon={{
+                  url: "https://cdn1.vectorstock.com/i/1000x1000/22/40/plumbing-icon-vector-10872240.jpg",
+                  scaledSize: new window.google.maps.Size(40, 40), // Adjust the size of the marker
+                }}
+                onClick={() => handleMarkerClick(coordinate)}
+              />
+            ))
+          : null}
+
+        {isFind5
+          ? manyCoordinate5.map((coordinate, index) => (
+              <Marker
+                key={index}
+                position={{
+                  lat: coordinate.latitude,
+                  lng: coordinate.longitude,
+                }}
+                icon={{
+                  url: "https://cdn1.vectorstock.com/i/1000x1000/22/40/plumbing-icon-vector-10872240.jpg",
+                  scaledSize: new window.google.maps.Size(40, 40), // Adjust the size of the marker
+                }}
+                onClick={() => handleMarkerClick(coordinate)}
+              />
+            ))
+          : null}
+
+        {isFind10
+          ? manyCoordinate10.map((coordinate, index) => (
               <Marker
                 key={index}
                 position={{
@@ -189,6 +301,7 @@ function Map() {
                   borderWidth: 2,
                   padding: 5,
                 }}
+                onClick={() => handleUserChosenMarker(selectedMarker.position)}
               >
                 lovely
               </button>
@@ -213,13 +326,20 @@ const PlacesAutocomplete = ({ setSelected }) => {
     setValue(address, false);
     clearSuggestions();
 
-    const results = await getGeocode({ address });
+    const results = await getGeocode({
+      address,
+      componentRestrictions: { country: "VN" }, // Country code for Vietnam
+    });
     const { lat, lng } = await getLatLng(results[0]);
     setSelected({ lat, lng });
+    console.log("result coord: ", lat, lng);
   };
 
   const handleSearch = async (address) => {
-    const results = await getGeocode({ address });
+    const results = await getGeocode({
+      address,
+      componentRestrictions: { country: "VN" }, // Country code for Vietnam
+    });
     const { lat, lng } = await getLatLng(results[0]);
     setSelected({ lat, lng });
   };
@@ -241,6 +361,7 @@ const PlacesAutocomplete = ({ setSelected }) => {
         className="combobox-input"
         placeholder="Search an address"
       />
+
       <ComboboxPopover>
         <ComboboxList>
           {status === "OK" &&

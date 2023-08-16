@@ -23,7 +23,7 @@
     "react-simple-widgets": "^6.7.0",
     "react-transition-group": "^4.4.5",
     "redux": "^4.2.1",
-    "socket.io-client": "^4.7.2",
+    ".io-client": "^4.7.2",
     "use-places-autocomplete": "^4.0.0"
   },
   "devDependencies": {

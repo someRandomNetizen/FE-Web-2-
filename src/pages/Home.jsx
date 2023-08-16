@@ -13,8 +13,14 @@ import Footer from "../partials/Footer";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loginSuccess, logout } from "../actions/authActions";
+import axios from "axios";
 
 function Home() {
+  const [coordinates, setCoordinates] = useState({
+    latitude: null,
+    longitude: null,
+  });
+
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const dispatch = useDispatch();
@@ -31,28 +37,58 @@ function Home() {
 
   // Listen for changes to isAuthenticated using useEffect
   useEffect(() => {
-    console.log("fuck");
+    console.log("phuc");
     setIsAuthenticatedChanged(!isAuthenticatedChanged);
   }, [isAuthenticated]);
 
   console.log("home value: ", isAuthenticated);
 
-  const [coordinates, setCoordinates] = useState({
-    latitude: null,
-    longitude: null,
-  });
+  const isDriver = useSelector((state) => state.auth.isDriver);
+  console.log("isDriver value:", isDriver);
+
+  //const dumdum = useSelector((state) => state.auth.driverID.driver_id);
+  const dumdum = useSelector((state) => state.auth.driverID.driver_id);
+  console.log("Here come the magic:", dumdum);
+  console.log(dumdum);
+
+  console.log("Lat ...:", coordinates.latitude);
+  console.log("Long ...:", coordinates.longitude);
+
+  const Authorization = localStorage.getItem("JWT");
 
   useEffect(() => {
     // Check if the Geolocation API is available in the browser
     if ("geolocation" in navigator) {
       // Get the user's current location
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const { latitude, longitude } = position.coords;
           console.log("lat: ", latitude);
           console.log("long: ", longitude);
+          console.log("dumdum: ", dumdum);
 
           setCoordinates({ latitude, longitude });
+          try {
+            const response = await axios.post(
+              "https://365truck.fdssoft.com/api/updateCoord",
+              { driver_id: dumdum, latitude: latitude, longtitude: longitude },
+              {
+                headers: {
+                  Authorization: Authorization,
+                },
+              }
+            );
+
+            if (response.status === 201) {
+              console.log("greatgreatgreatgreatgreatgreatgreatgreat");
+            } else {
+              console.log(
+                "failedfailedfailedfailedfailedfailedfailedfailedfailed"
+              );
+            }
+          } catch (error) {
+            console.error("Error:", error);
+          }
         },
         (error) => {
           console.error("Error getting location:", error.message);

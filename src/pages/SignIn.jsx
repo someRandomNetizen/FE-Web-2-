@@ -6,13 +6,21 @@ import PageIllustration from "../partials/PageIllustration";
 import Banner from "../partials/Banner";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { loginSuccess, logout } from "../actions/authActions";
+import {
+  loginSuccess,
+  logout,
+  isDriver,
+  driverID,
+} from "../actions/authActions";
+import { useSelector } from "react-redux";
 
 function SignIn() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    user_name: "admin3@gmail.com",
+    // user_name: "admin3@gmail.com",
+    // password: "QWEqwe123!@#",
+    user_name: "0751204968",
     password: "Qwe123!@#",
   });
 
@@ -61,17 +69,48 @@ function SignIn() {
     try {
       const response = await axios.post(
         "https://365truck.fdssoft.com/api/auth/loginDriver",
-        { phone_number, password }
+        { phone_number: phone_number, password: password }
       );
 
       if (response.status === 201) {
         console.log("Login successful:", response.data);
         dispatch(loginSuccess({ id: 1, name: "John Doe" }));
+        dispatch(isDriver());
         console.log("accessToken: ", response.data.access_token);
-        localStorage.setItem("JWT", response.data.access_token);
-        const storedToken = localStorage.getItem("JWT");
-        console.log("accessToken2: ", storedToken);
+        localStorage.setItem("JWT", `Bearer ${response.data.access_token}`);
+        //localStorage.setItem("JWT", response.data.access_token);
+        const Authorization = localStorage.getItem("JWT");
+        console.log("accessToken2: ", Authorization);
+        //const isDriver = useSelector((state) => state.auth.isDriver);
+
         // Navigate to "/" after successful login
+        console.log("boo boo");
+
+        const result = await axios.post(
+          "https://365truck.fdssoft.com/api/getDriver",
+          { phone_number },
+          {
+            headers: {
+              Authorization: Authorization, // Pass the authorization token in the header
+            },
+          }
+        );
+
+        console.log("Driver ID:", result.data.driver_id);
+        const driver_id = result.data.driver_id;
+        console.log("Driver ID:", driver_id);
+        dispatch(driverID(driver_id));
+
+        // dispatch(loginSuccess({ id: 1, name: "John Doe" }));
+        // dispatch(isDriver());
+        // console.log("accessToken: ", result.data.access_token);
+        // localStorage.setItem("JWT", result.data.access_token);
+        // const storedToken = localStorage.getItem("JWT");
+        // console.log("accessToken2: ", storedToken);
+        //const isDriver = useSelector((state) => state.auth.isDriver);
+
+        // Navigate to "/" after successful login
+
         navigate("/"); // This will redirect the user to the "/" route
       } else {
         console.log("Login failed:", response.status, response.statusText);

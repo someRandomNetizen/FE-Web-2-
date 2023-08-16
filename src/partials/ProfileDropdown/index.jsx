@@ -29,8 +29,8 @@ import { PopupMenu } from "react-simple-widgets";
 
 export default function UserProfile() {
   return (
-    <div id="app">
-      <div className="text-end">
+    <div id="app" style={{ borderColor: "transparent" }}>
+      <div className="text-end " style={{ color: "white" }}>
         <PopupMenu>
           <button className="btn btn-primary bg-purple-600 hover:bg-purple-700">
             <small>Menu</small>

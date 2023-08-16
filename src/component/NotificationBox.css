@@ -35,3 +35,7 @@
     display: flex;
     justify-content: center;
   }
+
+  .black-text {
+    color: #000000; /* Black color */
+  }

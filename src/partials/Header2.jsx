@@ -32,7 +32,7 @@ function Header2() {
 
   // Listen for changes to isAuthenticated using useEffect
   useEffect(() => {
-    console.log("fuck");
+    console.log("phuc");
     setIsAuthenticatedChanged(!isAuthenticatedChanged);
   }, [isAuthenticated]);
 

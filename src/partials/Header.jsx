@@ -11,6 +11,7 @@ function Header() {
   const mobileNav = useRef(null);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isDriver = useSelector((state) => state.auth.isDriver);
 
   // close the mobile menu on click outside
   useEffect(() => {
@@ -32,7 +33,7 @@ function Header() {
 
   // Listen for changes to isAuthenticated using useEffect
   useEffect(() => {
-    console.log("fuck");
+    console.log("phuc");
     setIsAuthenticatedChanged(!isAuthenticatedChanged);
   }, [isAuthenticated]);
 
@@ -77,9 +78,15 @@ function Header() {
               </li> */}
             </ul>
           </nav>
+
           {isAuthenticated ? (
             // If authenticated, render the UserProfile component
-            <UserProfile />
+            <div style={{ display: "flex", alignItems: "center" }}>
+              {isDriver ? (
+                <text style={{ color: "#34D399" }}> you are a thợ </text>
+              ) : null}
+              <UserProfile />
+            </div>
           ) : (
             // Check if isAuthenticated is null
             // If not authenticated, render the sign-in and sign-up links
