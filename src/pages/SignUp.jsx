@@ -36,6 +36,8 @@ function SignUp() {
     try {
       const response = await axios.post(
         "https://365truck.fdssoft.com/api/auth/regUser",
+        //"http://localhost:3001/api/auth/regUser",
+
         { full_name, user_name, phone_number, password }
       );
 

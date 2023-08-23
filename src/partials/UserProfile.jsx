@@ -38,7 +38,7 @@ class UserProfile extends React.Component {
             {showBadge && (
               <span className="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">
                 {/* TODO: Should get from currentUser */}
-                John Doe
+                Sáu Thiện Nhân
               </span>
             )}
           </div>

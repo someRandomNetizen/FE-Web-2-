@@ -46,52 +46,58 @@ export default function UserProfile() {
                 className="text-center mx-auto mb-4"
                 style={{ color: "white" }}
               >
-                <span>K</span>
+                <span>S</span>
               </div>
 
-              <h5 className="text-center mb-0" style={{ marginBottom: 20 }}>
-                John Doe
+              <h5 className="text-center mb-0" style={{ marginBottom: 5 }}>
+                Sáu Thiện Nhân
               </h5>
-              <p className="text-center mb-2" style={{ marginBottom: 20 }}>
-                jd@gmail.com
+              <p className="text-center mb-2" style={{ marginBottom: 5 }}>
+                0778285446
               </p>
 
               <hr style={{ color: "blue" }} />
 
               <p
                 className="mb-0"
-                style={{ color: "#bebebe", fontWeight: "bold", fontSize: 12 }}
+                style={{
+                  color: "blue",
+
+                  fontSize: 15,
+                  paddingTop: 10,
+                }}
               >
-                ROLES
-              </p>
-              <p style={{ fontSize: 12 }}>
-                {["Submitter", "Project manager", "Change control board"].join(
-                  ", "
-                )}
+                Vai trò: Thợ sửa ống nước
               </p>
 
-              <hr className="mb-0" style={{ margin: "0 -24px 0" }} />
+              <hr
+                className="mb-0"
+                style={{ paddingTop: 5, paddingBottom: 5 }}
+              />
 
               <div
                 className="list-group list-group-flush"
-                style={{ margin: "0 -24px 0" }}
+                style={{ margin: "0 -16px 0", paddingBottom: 5 }}
               >
                 <button className="list-group-item list-group-item-action px-4">
-                  <small>Change Requests</small>
+                  <small>Thông tin cá nhân</small>
                 </button>
                 <button className="list-group-item list-group-item-action px-4">
-                  <small>Pending Requests</small>
+                  <small>Số lượng đơn hàng</small>
                 </button>
                 <button className="list-group-item list-group-item-action px-4">
-                  <small>Other Requests</small>
+                  <small>Doanh thu và chi tiêu</small>
                 </button>
               </div>
 
-              <hr style={{ margin: "0 -24px 24px" }} />
+              <hr />
 
               <div className="d-grid">
-                <button className="btn btn-secondary">
-                  <small>Logout</small>
+                <button
+                  className="btn btn-secondary"
+                  style={{ paddingLeft: 160 }}
+                >
+                  <small>Đăng xuất</small>
                 </button>
               </div>
             </div>

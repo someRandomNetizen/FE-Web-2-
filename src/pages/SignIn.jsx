@@ -45,17 +45,36 @@ function SignIn() {
     try {
       const response = await axios.post(
         "https://365truck.fdssoft.com/api/auth/loginUser",
+        //"http://localhost:3001/api/auth/loginUser",
+
         { user_name, password }
       );
+      localStorage.setItem("user_name", user_name);
 
       if (response.status === 201) {
         console.log("Login successful:", response.data);
         dispatch(loginSuccess({ id: 1, name: "John Doe" }));
         console.log("accessToken: ", response.data.access_token);
-        localStorage.setItem("JWT", response.data.access_token);
-        const storedToken = localStorage.getItem("JWT");
-        console.log("accessToken2: ", storedToken);
+        localStorage.setItem("JWT", `Bearer ${response.data.access_token}`);
+        const Authorization = localStorage.getItem("JWT");
+        console.log("accessToken2: ", Authorization);
         // Navigate to "/" after successful login
+
+        const result = await axios.post(
+          "https://365truck.fdssoft.com/api/getUser",
+          //"http://localhost:3001/api/getDriver",
+
+          { user_name },
+          {
+            headers: {
+              Authorization: Authorization, // Pass the authorization token in the header
+            },
+          }
+        );
+        localStorage.setItem("user_id_local", result.data.user_id);
+        console.log("alala the greatest: ", result.data.user_id);
+        const alala = localStorage.getItem("user_id_local");
+        console.log("alala the greatest: ", alala);
         navigate("/"); // This will redirect the user to the "/" route
       } else {
         console.log("Login failed:", response.status, response.statusText);
@@ -69,8 +88,11 @@ function SignIn() {
     try {
       const response = await axios.post(
         "https://365truck.fdssoft.com/api/auth/loginDriver",
+        //"http://localhost:3001/api/auth/loginDriver",
+
         { phone_number: phone_number, password: password }
       );
+      localStorage.setItem("user_name", user_name);
 
       if (response.status === 201) {
         console.log("Login successful:", response.data);
@@ -88,6 +110,8 @@ function SignIn() {
 
         const result = await axios.post(
           "https://365truck.fdssoft.com/api/getDriver",
+          //"http://localhost:3001/api/getDriver",
+
           { phone_number },
           {
             headers: {
@@ -141,7 +165,8 @@ function SignIn() {
               {/* Page header */}
               <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
                 <h1 className="h1">
-                  Welcome back. We exist to make entrepreneurship easier.
+                  Niềm tin cho mọi gia đình, chuyên gia sửa chữa thiết bị và nhà
+                  của bạn.
                 </h1>
               </div>
 
@@ -163,7 +188,7 @@ function SignIn() {
                           aria-hidden="true"
                         ></span>
                         <span className="flex-auto pl-16 pr-8 -ml-16">
-                          Sign in with Google
+                          Đăng nhập với Google
                         </span>
                       </button>
                     </div>
@@ -175,7 +200,7 @@ function SignIn() {
                     aria-hidden="true"
                   ></div>
                   <div className="text-gray-400">
-                    Or, sign in with your Phone Number
+                    Hoặc, đăng nhập bằng số điện thoại
                   </div>
                   <div
                     className="border-t border-gray-700 border-dotted grow ml-3"
@@ -189,7 +214,7 @@ function SignIn() {
                         className="block text-gray-300 text-sm font-medium mb-1"
                         htmlFor="number"
                       >
-                        Username
+                        Tên đăng nhập
                       </label>
                       <input
                         id="number"
@@ -209,7 +234,7 @@ function SignIn() {
                         className="block text-gray-300 text-sm font-medium mb-1"
                         htmlFor="password"
                       >
-                        Password
+                        Mật khẩu
                       </label>
                       <input
                         id="password"
@@ -229,14 +254,14 @@ function SignIn() {
                         <label className="flex items-center">
                           <input type="checkbox" className="form-checkbox" />
                           <span className="text-gray-400 ml-2">
-                            Keep me signed in
+                            Lưu thông tin đăng nhập
                           </span>
                         </label>
                         <Link
                           to="/reset-password"
                           className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out"
                         >
-                          Forgot Password?
+                          Quên mật khẩu?
                         </Link>
                       </div>
                     </div>
@@ -244,18 +269,18 @@ function SignIn() {
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
                       <button className="btn text-white bg-purple-600 hover:bg-purple-700 w-full">
-                        Sign in
+                        Đăng nhập
                       </button>
                     </div>
                   </div>
                 </form>
                 <div className="text-gray-400 text-center mt-6">
-                  Don’t you have an account?{" "}
+                  Bạn không có tài khoản?{" "}
                   <Link
                     to="/signup"
                     className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out"
                   >
-                    Sign up
+                    Đăng ký
                   </Link>
                 </div>
               </div>

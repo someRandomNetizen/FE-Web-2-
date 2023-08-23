@@ -43,6 +43,7 @@ export const driverID = (driver_id) => ({
 });
 
 export const recShipment = () => ({
+  
   type: REC_SHIPMENT,
 });
 

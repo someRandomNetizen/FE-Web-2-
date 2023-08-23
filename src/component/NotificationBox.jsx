@@ -1,20 +1,45 @@
 import React, { useState } from "react";
 
-import "./NotificationBox.css";
+import "./style.css";
+
+import { useNavigate } from "react-router-dom";
+
+import socket from "../component/socket";
 
 function NotificationBox() {
   var userName = "abc";
   const [isAccepted, setIsAccepted] = useState(false);
   const [isDenied, setIsDenied] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleAccept = () => {
     setIsAccepted(true);
-    onAccept();
+
+    const user_id_socket = localStorage.getItem("user_id_socket");
+    const chosen_driver_id = localStorage.getItem("chosen_driver_id");
+
+    var response;
+    const shipment_id_socket = localStorage.getItem("shipment_id_socket");
+
+    socket.emit(
+      "recShipment",
+      {
+        state: 1,
+        driver_id: chosen_driver_id,
+        user_id: user_id_socket,
+        shipment_id: shipment_id_socket,
+      },
+      (response) => {
+        console.log("Shipment update successful:", response);
+      }
+    );
+
+    navigate("/ShipmentList2");
   };
 
   const handleDeny = () => {
     setIsDenied(true);
-    onDeny();
   };
 
   if (isAccepted) {

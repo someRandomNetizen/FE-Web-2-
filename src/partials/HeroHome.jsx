@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Modal from "../utils/Modal";
 import { Link, useNavigate } from "react-router-dom";
 
-import HeroImage from "../images/hero-image-01.jpg";
+import HeroImage from "../images/hero-image-02.png";
 
 function HeroHome() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -64,7 +64,7 @@ function HeroHome() {
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              Với phương trâm phục vụ khách hàng là trên hết, chúng tôi luôn cố
+              Với phương châm phục vụ khách hàng là trên hết, chúng tôi luôn cố
               gắng hoàn thiện chính mình. Để mang đến sự hài lòng cũng như phục
               vụ tốt nhất cho tất cả khách hàng.
             </p>
@@ -155,7 +155,7 @@ function HeroHome() {
                   autoPlay
                   controls
                 >
-                  <source src="/videos/video.mp4" type="video/mp4" />
+                  <source src="/videos/video2.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>

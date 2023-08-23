@@ -71,6 +71,8 @@ function Home() {
           try {
             const response = await axios.post(
               "https://365truck.fdssoft.com/api/updateCoord",
+              //"http://localhost:3001/api/updateCoord",
+
               { driver_id: dumdum, latitude: latitude, longtitude: longitude },
               {
                 headers: {

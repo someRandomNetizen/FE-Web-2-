@@ -10,11 +10,18 @@ import Home from "./pages/Home";
 import FindOrder from "./pages/FindOrder";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Booking from "./pages/Booking";
 import ResetPassword from "./pages/ResetPassword";
+import Checkout from "./pages/Checkout/Checkout";
+import ShipmentList from "./pages/ShipmentList/ShipmentList";
+import ShipmentList2 from "./pages/ShipmentList2/ShipmentList2";
 
 import store from "./store/store";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 function App({ persistor, basename }) {
   // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   // const user = useSelector((state) => state.auth.user);
@@ -38,17 +45,23 @@ function App({ persistor, basename }) {
 
   return (
     <>
-      <StrictMode>
-        <Provider store={store}>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/findorder" element={<FindOrder />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-          </Routes>
-        </Provider>
-      </StrictMode>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <StrictMode>
+          <Provider store={store}>
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/findorder" element={<FindOrder />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/shipmentlist" element={<ShipmentList />} />
+              <Route path="/shipmentlist2" element={<ShipmentList2 />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+            </Routes>
+          </Provider>
+        </StrictMode>
+      </LocalizationProvider>
     </>
   );
 }

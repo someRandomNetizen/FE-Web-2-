@@ -24,6 +24,10 @@ import { debounce } from "lodash";
 import { useDispatch } from "react-redux";
 import socketIO from "socket.io-client";
 import { recShipment } from "../actions/authActions";
+import socket from "./socket";
+import { useNavigate } from "react-router-dom";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
 
 export default function Map2() {
   const { isLoaded } = useLoadScript({
@@ -36,7 +40,10 @@ export default function Map2() {
   const dumdum = useSelector((state) => state.auth.driverID.driver_id);
 
   socket.on("recShipment", ({ state, driver_id, user_id, shipment_id }) => {
-    if (dumdum == driver_id) {
+    if (dumdum == driver_id && state == 0) {
+      localStorage.setItem("user_id_socket", user_id);
+      localStorage.setItem("shipment_id_socket", shipment_id);
+
       dispatch(recShipment());
       console.log("Test socket on:", driver_id);
     }
@@ -48,19 +55,14 @@ export default function Map2() {
   return <Map />;
 }
 
-const socket = socketIO("https://365truck.fdssoft.com", {
-  path: "/api/socket",
-});
-
 socket.emit("join", {}, () => {
   console.log("This has join socket room");
 });
 
 const mapContainerStyle = {
-  width: "75%",
-  height: "400px",
-  marginTop: 150,
-  marginLeft: 190,
+  width: "100%",
+  height: "600px",
+  marginTop: 10,
 };
 
 const initialCenter = {
@@ -74,6 +76,7 @@ const getAllPath = async (lat, long) => {
   try {
     const response = await axios.post(
       "https://365truck.fdssoft.com/api/findAllPathFromInput",
+      //"http://localhost:3001/api/findAllPathFromInput",
       { lat, long }
     );
 
@@ -150,11 +153,57 @@ function Map() {
 
   const [selectedMarker, setSelectedMarker] = useState(null);
 
-  const handleMarkerClick = (coordinate) => {
+  const [driverInfo, setDriverInfo] = useState(null);
+
+  const [distanceFinal, setDistanceFinal] = useState(0);
+
+  const handleMarkerClick = async (coordinate) => {
     setSelectedMarker({
       position: { lat: coordinate.latitude, lng: coordinate.longitude },
       title: coordinate.title,
     });
+
+    try {
+      const response = await axios.get(
+        `https://365truck.fdssoft.com/api/showDriver/`
+        //`http://localhost:3001/api/showDriver/`
+      );
+
+      if (response.status === 200) {
+        console.log(response.data);
+        console.log(coordinate.driver_id);
+        var apiShow = response.data;
+        var potential;
+        potential = apiShow.filter(
+          (coord) => coord.driver_id == coordinate.driver_id
+        );
+        console.log("doggy lovely mam", potential[0]);
+
+        const distance0 = manyCoordinate.filter(
+          (coord) => potential[0].driver_id == coord.driver_id
+        );
+        console.log("fluffy ", distance0);
+        var distanceLast = parseFloat(distance0[0].distance).toFixed(2);
+        console.log("my man", distanceLast);
+        setDistanceFinal(parseFloat(distance0[0].distance).toFixed(2));
+        setDriverInfo(potential[0]);
+        console.log("here potential: ", potential[0]);
+        localStorage.setItem("driver_name", potential[0].full_name);
+        localStorage.setItem("phone_number_driver", potential[0].phone_number);
+        localStorage.setItem("distance", distanceLast);
+        localStorage.setItem("rating", potential[0].rating / 2);
+      }
+    } catch (error) {
+      console.error("Error fetching driver information:", error);
+    }
+    const driver_name = localStorage.getItem("driver_name");
+    const phone_number_driver = localStorage.getItem("phone_number_driver");
+    const distance = localStorage.getItem("distance");
+    const rating = localStorage.getItem("rating");
+    console.log("here driver_name", driver_name);
+    console.log("here phone_number_driver", phone_number_driver);
+    console.log("here distance", distance);
+    console.log("here rating", rating);
   };
 
   const handleInfoWindowClose = () => {
@@ -174,6 +223,7 @@ function Map() {
   }, [selected]);
 
   console.log("Test 2222: ");
+  const navigate = useNavigate();
 
   const handleUserChosenMarker = (coord0) => {
     console.log("sir: ", coord0);
@@ -185,18 +235,9 @@ function Map() {
       return coord.latitude === coord0.lat && coord.longitude === coord0.lng;
     });
 
-    socket.emit(
-      "recShipment",
-      {
-        state: 0,
-        driver_id: matchingCoordinate.driver_id,
-        user_id: 1,
-        shipment_id: 1,
-      },
-      (response) => {
-        console.log("Shipment update successful:", response);
-      }
-    );
+    localStorage.setItem("chosen_driver_id", matchingCoordinate.driver_id);
+
+    navigate("/booking");
 
     if (matchingCoordinate) {
       console.log("Matching coordinate found:", matchingCoordinate.driver_id);
@@ -263,7 +304,7 @@ function Map() {
                   lng: coordinate.longitude,
                 }}
                 icon={{
-                  url: "https://cdn1.vectorstock.com/i/1000x1000/22/40/plumbing-icon-vector-10872240.jpg",
+                  url: "https://thothongminh.com/public/img/tho.png",
                   scaledSize: new window.google.maps.Size(40, 40), // Adjust the size of the marker
                 }}
                 onClick={() => handleMarkerClick(coordinate)}
@@ -273,10 +314,7 @@ function Map() {
 
         {selected && <Marker position={selected} />}
         {selectedMarker && (
-          <InfoWindowF
-            position={selectedMarker.position}
-            // onCloseClick={handleInfoWindowClose}
-          >
+          <InfoWindowF position={selectedMarker.position}>
             <div
               style={{
                 display: "flex",
@@ -284,26 +322,44 @@ function Map() {
                 alignItems: "center",
               }}
             >
-              <img
-                src="https://w7.pngwing.com/pngs/505/761/png-transparent-login-computer-icons-avatar-icon-monochrome-black-silhouette.png"
-                alt="Avatar"
-                style={{ width: "50px", height: "50px", marginRight: "10px" }}
-              />
-              <h1 style={{ color: "black" }}>wwwwwwwwwwwww</h1>
-              <h1 style={{ color: "black" }}>kkkkkkkkkkkkkkkkkk</h1>
-              <h1 style={{ color: "black" }}>kkkkkkkkkkkkkkkkkk</h1>
-              <h1 style={{ color: "black" }}>kkkkkkkkkkkkkkkkkk</h1>
-              <h1 style={{ color: "black" }}>kkkkkkkkkkkkkkkkkk</h1>
+              {driverInfo && (
+                <>
+                  <img
+                    src={"https://thothongminh.com/public/img/tho.png"} // Update with the correct field from the API response
+                    alt="Avatar"
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                    }}
+                  />
+                  <Rating
+                    name="readonly-rating"
+                    value={driverInfo.rating / 2} // Assuming driverInfo.rating is out of 10
+                    readOnly
+                  />
+                  <h1 style={{ color: "black", paddingBottom: 5 }}>
+                    Họ và tên: {driverInfo.full_name}
+                  </h1>
+                  <h1 style={{ color: "black", paddingBottom: 5 }}>
+                    Số điện thoại: {driverInfo.phone_number}
+                  </h1>
+                  <h1 style={{ color: "black", paddingBottom: 5 }}>
+                    Khoảng cách: {distanceFinal} Km
+                  </h1>
+                </>
+              )}
               <button
                 style={{
-                  borderColor: "red",
-                  color: "black",
+                  backgroundColor: "lightgreen",
+                  color: "black", // Using dark gray text color for better contrast
+                  borderColor: "white",
                   borderWidth: 2,
                   padding: 5,
+                  cursor: "pointer",
                 }}
                 onClick={() => handleUserChosenMarker(selectedMarker.position)}
               >
-                lovely
+                Đặt hàng
               </button>
             </div>
           </InfoWindowF>

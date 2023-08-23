@@ -60,6 +60,7 @@ const authReducer = (state = initialState, action) => {
         driverID: action.payload,
       };
     case REC_SHIPMENT:
+      console.log("REC_SHIPMENTREC_SHIPMENTREC_SHIPMENTREC_SHIPMENTREC_SHIPMENTREC_SHIPMENTREC_SHIPMENT")
       return {
         ...state,
         recShipment: true,

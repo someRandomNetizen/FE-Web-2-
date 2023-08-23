@@ -243,17 +243,21 @@ function FindOrder() {
 
   const buttonStyle = {
     border: "1px solid blue",
-    marginTop: 60,
+    marginTop: 20,
     width: 70,
     // Add any other styles you want here
   };
   const buttonStyle5 = {
     border: "1px solid blue",
-    marginTop: 60,
+    marginTop: 20,
     width: 70,
     marginLeft: 40,
     // Add any other styles you want here
   };
+
+  if (isReceive) {
+    console.log("the money is in the bag");
+  }
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
@@ -300,17 +304,16 @@ function FindOrder() {
       </div> */}
 
       <Map2 />
-      {isReceive ? <NotificationBox></NotificationBox> : null}
-
+      {isReceive && <NotificationBox></NotificationBox>}
       <div>
         <button onClick={handleClick} style={buttonStyle}>
-          Click Me
+          Tất cả
         </button>
         <button onClick={handleClick5} style={buttonStyle5}>
-          Click Me
+          5 Km
         </button>
         <button onClick={handleClick10} style={buttonStyle5}>
-          Click Me
+          10 Km
         </button>
       </div>
     </div>

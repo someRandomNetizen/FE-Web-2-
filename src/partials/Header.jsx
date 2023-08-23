@@ -83,7 +83,7 @@ function Header() {
             // If authenticated, render the UserProfile component
             <div style={{ display: "flex", alignItems: "center" }}>
               {isDriver ? (
-                <text style={{ color: "#34D399" }}> you are a thợ </text>
+                <text style={{ color: "#34D399" }}> Bạn là thợ </text>
               ) : null}
               <UserProfile />
             </div>
@@ -96,7 +96,7 @@ function Header() {
                   to="/signin"
                   className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
                 >
-                  Sign in
+                  Đăng nhập
                 </Link>
               </li>
               <li>
@@ -104,7 +104,7 @@ function Header() {
                   to="/signup"
                   className="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3"
                 >
-                  Sign up
+                  Đăng ký
                 </Link>
               </li>
             </ul>
