@@ -47,9 +47,8 @@ function Header() {
     return () => document.removeEventListener("keydown", keyHandler);
   });
   console.log("header value: ", isAuthenticated);
-
   return (
-    <header className="absolute w-full z-30">
+    <header className=" w-full z-30 top-0">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Site branding */}

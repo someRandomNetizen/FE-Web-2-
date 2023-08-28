@@ -1,0 +1,25 @@
+Material-UI: A widely-used and comprehensive library that implements the Material Design guidelines by Google. It offers a wide range of customizable components.
+
+Ant Design: A design system for enterprise-level products, providing a set of high-quality components and patterns for React applications.
+
+Semantic UI React: Semantic UI is a CSS framework, and Semantic UI React brings its components to React applications, making it easy to create modern and responsive interfaces.
+
+React Bootstrap: A React implementation of the popular Bootstrap framework, providing a collection of responsive and customizable components.
+
+Chakra UI: A simple and modular component library that provides developers with the building blocks to create accessible and responsive web applications.
+
+Tailwind CSS with React: While not a traditional component library, Tailwind CSS is a utility-first CSS framework that many React developers use to build custom UI components.
+
+Evergreen: A collection of React UI components designed for simplicity and consistency, offering basic building blocks for building applications.
+
+Blueprint: A UI toolkit for the web, developed by Palantir, that focuses on data-intensive applications and provides a set of well-designed components.
+
+Carbon Design System: Originally developed by IBM, this library offers a set of design patterns, components, and guidelines for building consistent and accessible user interfaces.
+
+Grommet: A library that provides a set of accessible and responsive components for building responsive and visually appealing web applications.
+
+PrimeReact: A rich set of open-source UI components for React, providing a wide range of features including customizable themes and a variety of components.
+
+Rebass: A lightweight library for building responsive and accessible UI components using a minimalist design approach.
+
+Shoelace.css: A back-to-basics CSS framework that provides a set of web components that can be easily used in React applications.

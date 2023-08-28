@@ -2,6 +2,10 @@ import React from "react";
 import FeatImage01 from "../images/features-03-image-01.png";
 import FeatImage02 from "../images/features-03-image-02.png";
 import FeatImage03 from "../images/features-03-image-03.png";
+import Plumber1 from "../images/plumber1.jpg";
+import Plumber2 from "../images/plumber2.jpg";
+import Plumber3 from "../images/plumber3.jpg";
+
 import "./FeaturesZigzag.css"; // Import the CSS file
 
 function FeaturesZigzag() {
@@ -19,7 +23,7 @@ function FeaturesZigzag() {
 
         <div className="grid">
           {/* 1st item */}
-          <div className="item md:grid md:grid-cols-12 md:gap-6 items-center">
+          <div className="item md:grid md:grid-cols-12 md:gap-6 items-center mb-8">
             {/* Image */}
             <div
               className="item-image max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1"
@@ -27,7 +31,7 @@ function FeaturesZigzag() {
             >
               <img
                 className="max-w-full mx-auto md:max-w-none h-auto"
-                src={FeatImage01}
+                src={Plumber1}
                 width="540"
                 height="405"
                 alt="Features 01"
@@ -82,7 +86,7 @@ function FeaturesZigzag() {
           </div>
 
           {/* 2nd item */}
-          <div className="item md:grid md:grid-cols-12 md:gap-6 items-center">
+          <div className="item md:grid md:grid-cols-12 md:gap-6 items-center mb-8">
             {/* Image */}
             <div
               className="item-image max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl"
@@ -90,7 +94,7 @@ function FeaturesZigzag() {
             >
               <img
                 className="max-w-full mx-auto md:max-w-none h-auto"
-                src={FeatImage02}
+                src={Plumber2}
                 width="540"
                 height="405"
                 alt="Features 02"
@@ -153,7 +157,7 @@ function FeaturesZigzag() {
             >
               <img
                 className="max-w-full mx-auto md:max-w-none h-auto"
-                src={FeatImage03}
+                src={Plumber3}
                 width="540"
                 height="405"
                 alt="Features 03"

@@ -6,15 +6,15 @@ const useStyles = makeStyles({
     top: 0,
     left: "10%",
     width: "80%",
-    
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "black",
+    backgroundColor: "transparent",
 
   },
   heading: {
+    paddingTop: "60px",
     marginBottom: "20px",
     color: "white",
     fontSize: "32px",
@@ -23,13 +23,13 @@ const useStyles = makeStyles({
   contentContainer: {
     backgroundColor: "white",
     width: "80%",
-    height: "80%",
+    height: "100%",
     padding: "20px",
     borderRadius: "10px",
     boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.1)",
     paddingLeft: 80,
     paddingRight: 80,
-
+    marginTop: 10,
   },
   blackText: {
     color: "green",
@@ -62,7 +62,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "flex-start", // Align children to the left
-    height: "10%", // Take full height for vertical centering
+    height: "575px", // Take full height for vertical centering
     paddingBottom: 15,
   },
   blackTextContainer2: {

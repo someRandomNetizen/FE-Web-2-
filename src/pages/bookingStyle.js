@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   pageContainer: {
     position: "absolute",
-    top: 0,
+    top: 50,
     left: "10%",
     width: "80%",
     
@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "black",
+    backgroundColor: "transparent",
 
   },
   heading: {

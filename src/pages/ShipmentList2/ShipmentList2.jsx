@@ -11,10 +11,18 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs"; // Import the dayjs library
 import axios from "axios";
+import backgroundImage from "../../images/background.jpg";
 
 function ShipmentList2() {
   const classes = useStyles();
   var result = [];
+
+  const shipment_id_socket = localStorage.getItem("shipment_id_socket");
+
+  var realState = "1";
+
+  console.log("here realState", realState);
+  console.log("here shipment_id_socket", shipment_id_socket);
 
   const user_name = localStorage.getItem("user_name");
   const [preResult, setPreResult] = useState([]);
@@ -34,7 +42,15 @@ function ShipmentList2() {
       if (response.status === 200) {
         console.log(response.data);
         console.log(user_name);
-        const filteredResult = response.data.filter(
+
+        const modifiedResult = response.data.map((shipment) => {
+          if (shipment.shipment_id == shipment_id_socket) {
+            shipment.payment = realState;
+          }
+          return shipment;
+        });
+
+        const filteredResult = modifiedResult.filter(
           (match) =>
             match.voucher === 1 && match.driver[0]?.phone_number === user_name
         );
@@ -55,8 +71,17 @@ function ShipmentList2() {
 
   const reversedPreResult = [...preResult].reverse();
 
+  console.log("the cow: ", reversedPreResult);
+
   return (
-    <div className={classes.scrollableContainer}>
+    <div
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundRepeat: "repeat-y",
+        backgroundSize: "auto",
+      }}
+      className={classes.scrollableContainer}
+    >
       {reversedPreResult.map((item, index) => {
         // Extract hours and minutes from item.manual
         const [hours, minutes] = item.manual.split(":");
@@ -83,11 +108,11 @@ function ShipmentList2() {
             </p>
             <hr style={{ borderTop: "1px solid black", margin: "10px 0" }} />
             <p>
-              Payment:{" "}
+              State:{" "}
               {item.payment === "0"
                 ? "Waiting driver"
                 : item.payment === "1"
-                ? "Accept"
+                ? "Order Confirmed"
                 : "Unknown"}
             </p>
             <p>{item.voucher}</p>

@@ -15,6 +15,7 @@ import ResetPassword from "./pages/ResetPassword";
 import Checkout from "./pages/Checkout/Checkout";
 import ShipmentList from "./pages/ShipmentList/ShipmentList";
 import ShipmentList2 from "./pages/ShipmentList2/ShipmentList2";
+import Header from "./partials/Header";
 
 import store from "./store/store";
 import { useSelector } from "react-redux";
@@ -48,6 +49,8 @@ function App({ persistor, basename }) {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <StrictMode>
           <Provider store={store}>
+            {/* <Header /> */}
+
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route path="/signin" element={<SignIn />} />
