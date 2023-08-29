@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import dayjs from "dayjs"; // Import the dayjs library
 import axios from "axios";
 import Header from "../../partials/Header";
+import Footer from "../../partials/Footer";
 import PageIllustration from "../../partials/PageIllustration";
 
 function Checkout() {
@@ -293,6 +294,10 @@ function Checkout() {
                 variant="contained"
                 color="primary"
                 onClick={handleConfirm}
+                style={{
+                  paddingRight: 22,
+                  paddingLeft: 22,
+                }}
               >
                 Hoàn tất
               </Button>
@@ -300,6 +305,7 @@ function Checkout() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }

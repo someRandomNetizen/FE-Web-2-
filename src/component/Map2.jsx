@@ -528,7 +528,11 @@ export default function Map2() {
   console.log("beautiful2:", dumdum);
 
   if (!isLoaded) return <div>Loading...</div>;
-  return <Map />;
+  return (
+    <div style={{ paddingLeft: 50, paddingRight: 50 }}>
+      <Map />
+    </div>
+  );
 }
 
 socket.emit("join", {}, () => {

@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   pageContainer: {
     position: "absolute",
-    top: 50,
+    top: 80,
     left: "10%",
     width: "80%",
     

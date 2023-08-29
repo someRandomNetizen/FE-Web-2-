@@ -54,10 +54,8 @@ function FeaturesBlocks() {
               </svg>
               <h4 className="h4 mb-2">Thương Hiệu Hàng Đầu</h4>
               <p className="text-lg text-gray-400 text-center">
-                ThoXuatSac là biểu tượng của sự xuất sắc và chất lượng. Được xây
-                dựng qua thời gian thông qua việc cung cấp những dịch vụ vượt
-                trội, ThoXuatSac không chỉ đơn thuần là một tên gọi mà còn là
-                một cam kết vững chắc đối với khách hàng.
+                Biểu tượng xuất sắc và chất lượng, xây dựng qua thời gian bằng
+                việc cung cấp dịch vụ vượt trội, cam kết với khách hàng.
               </p>
             </div>
 
@@ -96,9 +94,9 @@ function FeaturesBlocks() {
               </svg>
               <h4 className="h4 mb-2">Quy Trình Rõ Ràng</h4>
               <p className="text-lg text-gray-400 text-center">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat.
+                Có quy trình rõ ràng, hiệu quả và minh bạch. Dựa trên cấu trúc
+                hóa và phân chia công việc logic, tạo nền tảng vững chắc cho
+                hoạt động có trật tự, linh hoạt và đáng tin cậy.
               </p>
             </div>
 
@@ -148,9 +146,8 @@ function FeaturesBlocks() {
               </svg>
               <h4 className="h4 mb-2">Phủ Sóng Rộng Khắp</h4>
               <p className="text-lg text-gray-400 text-center">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat.
+                ThoGioi phủ sóng khắp 64 tỉnh thành và nhiều nước trên thế giới,
+                hỗ trợ dịch vụ tận tay, gọn gàng và nhanh chóng
               </p>
             </div>
 
@@ -193,9 +190,8 @@ function FeaturesBlocks() {
               </svg>
               <h4 className="h4 mb-2">Thợ Tay Nghề Cao</h4>
               <p className="text-lg text-gray-400 text-center">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat.
+                Thành viên bao gồm những thợ có trình độ chuyên môn cao, cung
+                cấp dịch vụ với chất lượng tốt nhất
               </p>
             </div>
 
@@ -235,9 +231,9 @@ function FeaturesBlocks() {
               </svg>
               <h4 className="h4 mb-2">Phản Hồi Tích Cực</h4>
               <p className="text-lg text-gray-400 text-center">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat.
+                Với phương châm khách hàng đặt lên hàng đầu, ThoGioi vinh hạnh
+                nhận được vô số đánh tích cực của khách hàng tại khắp các nơi
+                tảng
               </p>
             </div>
 
@@ -284,9 +280,9 @@ function FeaturesBlocks() {
               </svg>
               <h4 className="h4 mb-2">Bảo Hành Chu Đáo</h4>
               <p className="text-lg text-gray-400 text-center">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat.
+                Cung cấp dịch vụ hậu kỳ tốt nhất ngành. Với chúng tôi, sự hài
+                lòng của khách hàng là trên hết kể cả là trong quá trình làm
+                việc, hay sau đó.
               </p>
             </div>
           </div>

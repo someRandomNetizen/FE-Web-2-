@@ -13,11 +13,11 @@ function FeaturesZigzag() {
     <section className="section">
       <div className="container">
         <div className="section-header">
-          <div className="tag">Reach goals that matter</div>
-          <h1 className="title">One product, unlimited solutions</h1>
+          <div className="tag">Ống nước bạn quan trọng</div>
+          <h1 className="title">ThoGioi, Bạn của mọi nhà</h1>
           <p className="subtitle">
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit laborum — semper quis lectus nulla.
+            Với kinh nghiệm làm việc lâu đời và đội ngũ thợ chất lượng, ThoGioi
+            tự tin là một trong những dịch vụ đầu ngành
           </p>
         </div>
 
@@ -43,11 +43,12 @@ function FeaturesZigzag() {
               data-aos="fade-right"
             >
               <div className="md:pr-4 lg:pr-12 xl:pr-16">
-                <div className="item-heading">More speed. Less spend</div>
-                <h3 className="item-title">Keep projects on schedule</h3>
+                <div className="item-heading">Chất lượng tuyệt đối</div>
+                <h3 className="item-title">Luôn đảm bảo chất lượng</h3>
                 <p className="item-description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Giá trị cốt lõi mà ThoGioi đặt lên hàng đầu là chất lượng dịch
+                  vụ. Những người thợ của chúng tôi sẽ cung cấp cho bạn giải
+                  pháp tối ưu nhất và tiết kiệm chi phí nhất.
                 </p>
                 <ul className="item-list">
                   <li>
@@ -58,7 +59,7 @@ function FeaturesZigzag() {
                     >
                       <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                     </svg>
-                    <span>Duis aute irure dolor in reprehenderit</span>
+                    <span>Giải pháp tối ưu</span>
                   </li>
                   <li>
                     <svg
@@ -68,7 +69,7 @@ function FeaturesZigzag() {
                     >
                       <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                     </svg>
-                    <span>Excepteur sint occaecat</span>
+                    <span>Tiết kiệm chi phí</span>
                   </li>
                   <li>
                     <svg
@@ -78,7 +79,7 @@ function FeaturesZigzag() {
                     >
                       <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                     </svg>
-                    <span>Amet consectetur adipiscing elit</span>
+                    <span>Hoạt động bền vững</span>
                   </li>
                 </ul>
               </div>
@@ -106,11 +107,12 @@ function FeaturesZigzag() {
               data-aos="fade-left"
             >
               <div className="md:pl-4 lg:pl-12 xl:pl-16">
-                <div className="item-heading">More speed. Less spend</div>
-                <h3 className="item-title">Keep projects on schedule</h3>
+                <div className="item-heading">Làm việc nhanh chóng</div>
+                <h3 className="item-title">Tốc độ vượt trội</h3>
                 <p className="item-description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Các chuyên gia ở ThoGioi luôn đảm bảo rằng tốc độ đi đôi với
+                  chất lượng công việc. Qua đó đem đến trải nghiệm tốt nhất cho
+                  người dùng
                 </p>
                 <ul className="item-list">
                   <li>
@@ -121,7 +123,7 @@ function FeaturesZigzag() {
                     >
                       <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                     </svg>
-                    <span>Duis aute irure dolor in reprehenderit</span>
+                    <span>Nhanh chóng nhưng chất lượng</span>
                   </li>
                   <li>
                     <svg
@@ -131,7 +133,7 @@ function FeaturesZigzag() {
                     >
                       <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                     </svg>
-                    <span>Excepteur sint occaecat</span>
+                    <span>Bảo đảm an toàn</span>
                   </li>
                   <li>
                     <svg
@@ -141,7 +143,7 @@ function FeaturesZigzag() {
                     >
                       <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                     </svg>
-                    <span>Amet consectetur adipiscing elit</span>
+                    <span>Bảo hành chu đáo</span>
                   </li>
                 </ul>
               </div>
@@ -169,11 +171,12 @@ function FeaturesZigzag() {
               data-aos="fade-right"
             >
               <div className="md:pr-4 lg:pr-12 xl:pr-16">
-                <div className="item-heading">More speed. Less spend</div>
-                <h3 className="item-title">Keep projects on schedule</h3>
+                <div className="item-heading">Khách hàng là nhất</div>
+                <h3 className="item-title">Quan tâm trải nghiệm của bạn</h3>
                 <p className="item-description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Tiêu chí của ThoGioi luôn đặt khách hàng lên trên hết. Với
+                  chúng tôi, khách hàng luôn đúng trong mọi trường hợp từ lớn
+                  nhất đến nhỏ nhất
                 </p>
                 <ul className="item-list">
                   <li>
@@ -184,7 +187,7 @@ function FeaturesZigzag() {
                     >
                       <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                     </svg>
-                    <span>Duis aute irure dolor in reprehenderit</span>
+                    <span>Hết mình vì bạn</span>
                   </li>
                   <li>
                     <svg
@@ -194,7 +197,7 @@ function FeaturesZigzag() {
                     >
                       <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                     </svg>
-                    <span>Excepteur sint occaecat</span>
+                    <span>Tận tâm phục vụ</span>
                   </li>
                   <li>
                     <svg
@@ -204,7 +207,7 @@ function FeaturesZigzag() {
                     >
                       <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                     </svg>
-                    <span>Amet consectetur adipiscing elit</span>
+                    <span>Ghi nhận đánh giá của bạn</span>
                   </li>
                 </ul>
               </div>

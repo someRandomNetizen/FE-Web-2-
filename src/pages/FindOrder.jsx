@@ -162,6 +162,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../partials/Header";
+import Footer from "../partials/Footer";
 import Banner from "../partials/Banner";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -351,7 +352,7 @@ function FindOrder() {
         <Map2 />
         {isReceive && <NotificationBox></NotificationBox>}
         <div className="flex flex-row space-x-5">
-          <div data-aos="fade-up" data-aos-delay="400">
+          <div className="ml-12" data-aos="fade-up" data-aos-delay="400">
             <button
               className="px-4 py-2 btn text-white bg-purple-600 hover:bg-purple-700 rounded-lg w-full sm:w-auto mt-5"
               onClick={handleClick}
@@ -359,7 +360,7 @@ function FindOrder() {
               Tất cả
             </button>
           </div>
-          <div data-aos="fade-up" data-aos-delay="400">
+          <div className="ml-2" data-aos="fade-up" data-aos-delay="400">
             <button
               className="px-4 py-2 btn text-white bg-purple-600 hover:bg-purple-700 rounded-lg w-full sm:w-auto mt-5"
               onClick={handleClick5}
@@ -367,7 +368,7 @@ function FindOrder() {
               5 Km
             </button>
           </div>
-          <div data-aos="fade-up" data-aos-delay="400">
+          <div className="ml-2" data-aos="fade-up" data-aos-delay="400">
             <button
               className="px-4 py-2 btn text-white bg-purple-600 hover:bg-purple-700 rounded-lg w-full sm:w-auto mt-5"
               onClick={handleClick10}
@@ -377,6 +378,7 @@ function FindOrder() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }

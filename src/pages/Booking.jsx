@@ -21,6 +21,7 @@ import Refrigirator2 from "../component/Refrigirator/Refrigirator2/Refrigirator2
 import Refrigirator3 from "../component/Refrigirator/Refrigirator3/Refrigirator3";
 import ShipmentDialog from "../component/ShipmentDialog/ShipmentDialog";
 import Header from "../partials/Header";
+import Footer from "../partials/Footer";
 import PageIllustration from "../partials/PageIllustration";
 
 function Booking() {
@@ -276,6 +277,8 @@ function Booking() {
               </Button>
             </div>
           </div>
+          <Footer></Footer>
+
           <ShipmentDialog
             open={shipmentDialogOpen}
             onClose={handleShipmentDialogClose}
