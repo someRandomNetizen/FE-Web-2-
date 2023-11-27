@@ -185,10 +185,10 @@ function Booking() {
             </div>
             <div className={classes.blackTextContainer}>
               <p className={classes.blackText2}>
-                Địa chỉ làm việc: VR93+JH4 Khu phố 6 Thủ Đức Thành phố Hồ Chí
-                Minh Việt Nam
+                <span style={{ fontWeight: "bold" }}>Địa chỉ làm việc:</span>{" "}
+                VR93+JH4 Khu phố 6 Thủ Đức Thành phố Hồ Chí Minh Việt Nam
               </p>
-              <p className={classes.blackText2}>Dịch vụ liên quan: </p>
+              <p className={classes.blackText002}>Dịch vụ liên quan: </p>
             </div>
             <Stack
               direction="row"

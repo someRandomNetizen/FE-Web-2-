@@ -229,6 +229,7 @@ const useStyles = makeStyles({
     marginLeft: "auto",
     paddingRight: 20,
   },
+  
 });
 
 export default useStyles;

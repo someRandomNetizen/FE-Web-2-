@@ -10,6 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import goal2 from "../../images/goal3.jpg";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -60,6 +61,26 @@ export default function ShipmentDialog({
 
   const navigate = useNavigate();
 
+  const StyledBootstrapDialog = styled(Dialog)(({ theme }) => ({
+    "& .MuiDialogContent-root": {
+      padding: theme.spacing(2),
+    },
+    "& .MuiDialogActions-root": {
+      padding: theme.spacing(2),
+    },
+  }));
+
+  const DialogTitleContainer = styled(DialogTitle)(({ theme }) => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: theme.spacing(2),
+  }));
+
+  const StyledTypography = styled(Typography)(({ theme }) => ({
+    marginBottom: theme.spacing(1),
+  }));
+
   const handleConfirm = () => {
     onConfirm(); // You can perform any other necessary actions here
 
@@ -68,57 +89,167 @@ export default function ShipmentDialog({
   };
 
   return (
-    <BootstrapDialog
+    <StyledBootstrapDialog
       onClose={onClose}
       aria-labelledby="customized-dialog-title"
       open={open}
     >
-      {isMessageEmpty ? (
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
-          Thông Tin
-        </BootstrapDialogTitle>
-      ) : (
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
-          Thông Tin Đơn Hàng
-        </BootstrapDialogTitle>
+      <DialogTitleContainer id="customized-dialog-title" onClose={onClose}>
+        <span
+          style={{
+            color: "#5D5DFF",
+            fontSize: isMessageEmpty ? "18px" : "20px",
+            fontWeight: isMessageEmpty ? "bold" : "600",
+            marginRight: "auto",
+            marginLeft: 15,
+            fontSize: 25,
+          }}
+        >
+          {isMessageEmpty ? "Thông Tin" : "Thông Tin Đơn Hàng"}
+        </span>
+        <IconButton aria-label="close" onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      </DialogTitleContainer>
+      {!isMessageEmpty && (
+        <div>
+          <img
+            src={goal2}
+            style={{
+              width: "70%",
+              height: "70%",
+              marginLeft: 95,
+            }}
+          ></img>
+        </div>
       )}
-
       <DialogContent dividers>
         {!isMessageEmpty && (
           <div style={{ textAlign: "center", marginBottom: "10px" }}>
-            <Typography variant="h6" gutterBottom>
+            <StyledTypography
+              variant="h6"
+              gutterBottom
+              style={{ color: "#00008B", fontWeight: 600, fontSize: 23 }}
+            >
               Sáu Thiện Nhân
-            </Typography>
+            </StyledTypography>
           </div>
         )}
         {!isMessageEmpty && (
-          <Typography gutterBottom>
-            Địa chỉ làm việc: VR93+JH4 Khu phố 6 Thủ Đức Thành phố Hồ Chí Minh
-            Việt Nam
-          </Typography>
+          <div>
+            <StyledTypography
+              gutterBottom
+              style={{
+                whiteSpace: "pre-line",
+                fontSize: "17px",
+                fontWeight: 700,
+                marginBottom: "1px", // Adjust this value to make the lines closer
+              }}
+            >
+              Địa chỉ làm việc:
+            </StyledTypography>
+            <StyledTypography
+              gutterBottom
+              style={{
+                whiteSpace: "pre-line",
+                fontSize: "14px",
+              }}
+            >
+              <span
+                style={{
+                  fontWeight: "medium",
+                  fontSize: "16px",
+                  color: "gray",
+                  marginTop: "1px",
+                }}
+              >
+                VR93+JH4 Khu phố 6 Thủ Đức Thành phố Hồ Chí Minh Việt Nam
+              </span>
+            </StyledTypography>
+          </div>
         )}
-        <Typography gutterBottom>Dịch vụ đã chọn: </Typography>
-        <Typography gutterBottom style={{ whiteSpace: "pre-line" }}>
+
+        <StyledTypography
+          gutterBottom
+          style={{
+            whiteSpace: "pre-line",
+            fontSize: "17px",
+            fontWeight: 700,
+            marginBottom: "1px", // Adjust this value to make the lines closer
+          }}
+        >
+          Dịch vụ đã chọn:
+        </StyledTypography>
+        <StyledTypography
+          gutterBottom
+          style={{ whiteSpace: "pre-line", color: "gray", marginTop: "1px" }}
+        >
           {message}
-        </Typography>
+        </StyledTypography>
         {!isMessageEmpty && (
-          <Typography gutterBottom style={{ whiteSpace: "pre-line" }}>
-            Phí dịch vụ: {160 * amount}.000 VND
-          </Typography>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <StyledTypography
+              gutterBottom
+              style={{
+                whiteSpace: "pre-line",
+                fontSize: "17px",
+                fontWeight: 700,
+              }}
+            >
+              Phí dịch vụ:
+            </StyledTypography>
+            <StyledTypography
+              gutterBottom
+              style={{
+                whiteSpace: "pre-line",
+                fontSize: "14px",
+                marginLeft: "5px",
+              }}
+            >
+              <span
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "18px",
+                  color: "green",
+                }}
+              >
+                {160 * amount}.000 VND
+              </span>
+            </StyledTypography>
+          </div>
         )}
       </DialogContent>
-      <DialogActions>
-        {!isMessageEmpty && (
-          <Button autoFocus onClick={onClose}>
-            Đặt thêm
-          </Button>
-        )}
+      {/* <DialogActions>
+        {!isMessageEmpty && <Button onClick={onClose}>Đặt thêm</Button>}
         {!isMessageEmpty && (
           <Button color="primary" onClick={handleConfirm}>
             Thanh toán
           </Button>
         )}
+      </DialogActions> */}
+      <DialogActions>
+        {!isMessageEmpty && (
+          <div data-aos="fade-up" data-aos-delay="400">
+            <button
+              onClick={handleConfirm}
+              className="btn text-white bg-purple-600 hover:bg-purple-700 w-full mb-2 sm:w-auto sm:mb-0 py-2 px-4 text-sm"
+            >
+              Thanh toán
+            </button>
+          </div>
+        )}
+        {!isMessageEmpty && (
+          <div data-aos="fade-up" data-aos-delay="600">
+            <button
+              className="btn text-white bg-gray-700 hover:bg-gray-800 w-full sm:w-auto sm:ml-2 py-2 px-5 text-sm"
+              href="#0"
+              onClick={onClose}
+            >
+              Đặt Thêm
+            </button>
+          </div>
+        )}
       </DialogActions>
-    </BootstrapDialog>
+    </StyledBootstrapDialog>
   );
 }

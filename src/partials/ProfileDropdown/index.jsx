@@ -23,11 +23,39 @@
 // };
 
 // export default UserProfile;
+import { useDispatch } from "react-redux";
 
 import "./styles.scss";
 import { PopupMenu } from "react-simple-widgets";
-
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../../actions/authActions";
 export default function UserProfile() {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    localStorage.removeItem("JWT");
+    dispatch(logout());
+  };
+  const isDriver = useSelector((state) => state.auth.isDriver);
+  var lovely = isDriver;
+
+  const driver_name = localStorage.getItem("driver_name");
+  const user_full_name = localStorage.getItem("user_full_name");
+  const user_phone_number = localStorage.getItem("user_phone_number");
+  const phone_number_driver = localStorage.getItem("phone_number_driver");
+
+  console.log("here is the isDriver: ", lovely);
+
+  const handleShipment = () => {
+    if (isDriver) {
+      navigate("/ShipmentList2");
+    } else {
+      navigate("/ShipmentList");
+    }
+  };
+
   return (
     <div id="app" style={{ borderColor: "transparent" }}>
       <div className="text-end " style={{ color: "white" }}>
@@ -50,10 +78,10 @@ export default function UserProfile() {
               </div>
 
               <h5 className="text-center mb-0" style={{ marginBottom: 5 }}>
-                Sáu Thiện Nhân
+                {lovely ? driver_name : user_full_name}
               </h5>
               <p className="text-center mb-2" style={{ marginBottom: 5 }}>
-                0778285446
+                {lovely ? phone_number_driver : user_phone_number}
               </p>
 
               <hr style={{ color: "blue" }} />
@@ -82,7 +110,10 @@ export default function UserProfile() {
                 <button className="list-group-item list-group-item-action px-4">
                   <small>Thông tin cá nhân</small>
                 </button>
-                <button className="list-group-item list-group-item-action px-4">
+                <button
+                  className="list-group-item list-group-item-action px-4"
+                  onClick={handleShipment}
+                >
                   <small>Số lượng đơn hàng</small>
                 </button>
                 <button className="list-group-item list-group-item-action px-4">
@@ -96,6 +127,7 @@ export default function UserProfile() {
                 <button
                   className="btn btn-secondary"
                   style={{ paddingLeft: 160 }}
+                  onClick={handleLogout}
                 >
                   <small>Đăng xuất</small>
                 </button>

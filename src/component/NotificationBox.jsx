@@ -5,6 +5,7 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 
 import socket from "../component/socket";
+import axios from "axios";
 
 function NotificationBox() {
   var userName = "abc";
@@ -13,7 +14,7 @@ function NotificationBox() {
 
   const navigate = useNavigate();
 
-  const handleAccept = () => {
+  const handleAccept = async () => {
     setIsAccepted(true);
 
     const user_id_socket = localStorage.getItem("user_id_socket");
@@ -32,6 +33,17 @@ function NotificationBox() {
       },
       (response) => {
         console.log("Shipment update successful:", response);
+      }
+    );
+    const Authorization = localStorage.getItem("JWT");
+
+    const response2 = await axios.post(
+      "https://365truck.fdssoft.com/api/updateShipmentPayment2",
+      { shipment_id: shipment_id_socket, payment: "1" },
+      {
+        headers: {
+          Authorization: Authorization,
+        },
       }
     );
 

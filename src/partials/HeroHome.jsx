@@ -1,16 +1,54 @@
 import React, { useState, useRef, useEffect } from "react";
 import Modal from "../utils/Modal";
 import { Link, useNavigate } from "react-router-dom";
-
+// import socketIO from "socket.io-client";
+// import { recShipment } from "../actions/authAction
 import HeroImage from "../images/hero-image-02.png";
+import axios from "axios";
 
 function HeroHome() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const video = useRef(null);
+  const navigate = useNavigate();
+  const JWT = localStorage.getItem("JWT");
+  const [videoUri, setVideoUri] = useState("");
+  const [title, setTitle] = useState(""); // Set the initial value as needed
+  const [description, setDescription] = useState(""); // Set the initial value as needed
+  const [defaultDirectory, setDefaultDirectory] = useState(""); // Set the initial value as needed
 
   useEffect(() => {
     videoModalOpen ? video.current.play() : video.current.pause();
   }, [videoModalOpen]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://a0cc-14-161-38-9.ngrok-free.app/api/ShowRecord11",
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+            },
+          }
+        );
+        console.log("the result of api is: ", response);
+        console.log("the result of api data is: ", response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    console.log("here is api: ");
+    fetchData();
+  }, []);
+
+  const handleSearch = () => {
+    if (!JWT) {
+      navigate("/signin");
+    } else {
+      navigate("/findorder");
+    }
+  };
+  ///videos/video2.mp4
 
   return (
     <section>
@@ -70,12 +108,12 @@ function HeroHome() {
             </p>
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div data-aos="fade-up" data-aos-delay="400">
-                <Link
-                  to="/findorder"
+                <button
+                  onClick={handleSearch}
                   className="btn text-white bg-purple-600 hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0"
                 >
                   Tìm kiếm
-                </Link>
+                </button>
               </div>
               <div data-aos="fade-up" data-aos-delay="600">
                 <a

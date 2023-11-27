@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   heading: {
     marginBottom: "20px",
     color: "white",
-    fontSize: "32px",
+    fontSize: "42px",
   },
   contentContainer: {
     backgroundColor: "white",
@@ -42,6 +42,12 @@ const useStyles = makeStyles({
     color: "black",
     textAlign: "left", // Align the text to the left
     paddingBottom: 5,
+  },
+  blackText002: {
+    color: "black",
+    textAlign: "left", // Align the text to the left
+    paddingBottom: 5,
+    fontWeight: 700,
   },
   blackText3: {
     color: "black",

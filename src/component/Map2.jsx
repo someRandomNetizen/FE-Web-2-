@@ -507,7 +507,8 @@ import Header from "../partials/Header";
 
 export default function Map2() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyA759T_2b8Vd9KPputmQ8AslLcuGwARXMU",
+    // googleMapsApiKey: "AIzaSyA759T_2b8Vd9KPputmQ8AslLcuGwARXMU",
+    googleMapsApiKey: "AIzaSyCNrHal_gkT6ojR3jzYO7K1CyqUups_JuY",
     libraries: ["places"],
   });
 
@@ -583,8 +584,8 @@ function Map() {
   const dumdum = useSelector((state) => state.auth.driverID.driver_id);
   console.log("beautiful:", dumdum);
 
-  //let key = "AIzaSyBSdec1YbDtXb9kM9wkEk10nxW4CmOy6Dc";
-  let key = "AIzaSyA759T_2b8Vd9KPputmQ8AslLcuGwARXMU";
+  let key = "AIzaSyCNrHal_gkT6ojR3jzYO7K1CyqUups_JuY";
+  //let key = "AIzaSyA759T_2b8Vd9KPputmQ8AslLcuGwARXMU";
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -643,6 +644,15 @@ function Map() {
       title: coordinate.title,
     });
 
+    //const [selectedMarkerAddress, setSelectedMarkerAddress] = useState("");
+
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinate.latitude},${coordinate.longitude}&key=AIzaSyCNrHal_gkT6ojR3jzYO7K1CyqUups_JuY`
+    );
+
+    const address = response.data.results[0].formatted_address;
+
+    console.log("Marker clicked address: ", address);
     try {
       const response = await axios.get(
         `https://365truck.fdssoft.com/api/showDriver/`
@@ -741,9 +751,7 @@ function Map() {
         mapContainerStyle={mapContainerStyle}
         onLoad={onLoad}
         onUnmount={onUnmount}
-        //
         center={selected}
-        //
       >
         {isFind
           ? manyCoordinate.map((coordinate, index) => (
@@ -754,7 +762,7 @@ function Map() {
                   lng: coordinate.longitude,
                 }}
                 icon={{
-                  url: "https://cdn1.vectorstock.com/i/1000x1000/22/40/plumbing-icon-vector-10872240.jpg",
+                  url: "https://www.clipartmax.com/png/middle/54-543649_round-plumber-icon-with-wrench-and-house-vector-image-repairing-man-icon.png",
                   scaledSize: new window.google.maps.Size(40, 40), // Adjust the size of the marker
                 }}
                 onClick={() => handleMarkerClick(coordinate)}
@@ -771,7 +779,7 @@ function Map() {
                   lng: coordinate.longitude,
                 }}
                 icon={{
-                  url: "https://cdn1.vectorstock.com/i/1000x1000/22/40/plumbing-icon-vector-10872240.jpg",
+                  url: "https://www.clipartmax.com/png/middle/54-543649_round-plumber-icon-with-wrench-and-house-vector-image-repairing-man-icon.png",
                   scaledSize: new window.google.maps.Size(40, 40), // Adjust the size of the marker
                 }}
                 onClick={() => handleMarkerClick(coordinate)}

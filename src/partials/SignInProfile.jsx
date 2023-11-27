@@ -22,9 +22,13 @@ function SignInProfile() {
 
     // Make API call to Google Maps Places API with the query
     // Replace 'YOUR_API_KEY' with your actual Google Maps API key
+
     axios
+      // .get(
+      //   `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=AIzaSyA759T_2b8Vd9KPputmQ8AslLcuGwARXMU`
+      // )
       .get(
-        `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=AIzaSyA759T_2b8Vd9KPputmQ8AslLcuGwARXMU`
+        `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=AIzaSyCNrHal_gkT6ojR3jzYO7K1CyqUups_JuY`
       )
       .then((response) => {
         setSearchResults(response.data.results);

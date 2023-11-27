@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   pageContainer: {
     position: "absolute",
-    top: 0,
+    top: 30,
     left: "10%",
     width: "80%",
     display: "flex",
@@ -11,6 +11,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "transparent",
+    marginTop: "60px",
 
   },
   heading: {
@@ -22,14 +23,15 @@ const useStyles = makeStyles({
   
   contentContainer: {
     backgroundColor: "white",
-    width: "80%",
+    width: "60%",
     height: "100%",
     padding: "20px",
     borderRadius: "10px",
     boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.1)",
-    paddingLeft: 80,
+    paddingLeft: 30,
     paddingRight: 80,
     marginTop: 10,
+    borderRadius: 15,
   },
   blackText: {
     color: "green",
@@ -43,13 +45,13 @@ const useStyles = makeStyles({
     color: "black",
     textAlign: "left", // Align the text to the left
     paddingBottom: 5,
+    fontWeight: 500,
   },
   blackText3: {
-    color: "black",
+    fontWeight: 500,
+    color: "#cccccc",
     textAlign: "left", // Align the text to the left
     paddingBottom: 5,
-    fontSize: 25,
-
   },
   image: {
     display: "block", // To center the image horizontally
@@ -64,6 +66,8 @@ const useStyles = makeStyles({
     alignItems: "flex-start", // Align children to the left
     height: "575px", // Take full height for vertical centering
     paddingBottom: 15,
+    flex: 1,
+    marginLeft: 40,
   },
   blackTextContainer2: {
     marginTop: -20,
@@ -96,10 +100,14 @@ const useStyles = makeStyles({
   formGroup: {
     marginRight: "45%", // Add margin to the right side of the FormGroup
   },
-
   scrollableContainer: {
     height: "100vh", // Adjust this value as needed
     overflowY: "auto",
+  },
+  containerPro: {
+    alignItems: "center",
+    alignContent: "center",
+    display: "flex",
   },
 });
 

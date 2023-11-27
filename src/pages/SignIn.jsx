@@ -18,10 +18,10 @@ function SignIn() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    // user_name: "admin3@gmail.com",
-    // password: "QWEqwe123!@#",
-    user_name: "0751204968",
-    password: "Qwe123!@#",
+    user_name: "admin3@gmail.com",
+    password: "QWEqwe123!@#",
+    // user_name: "0751204968",
+    // password: "Qwe123!@#",
   });
 
   // Update the state when the user types in the input fields
@@ -72,8 +72,11 @@ function SignIn() {
           }
         );
         localStorage.setItem("user_id_local", result.data.user_id);
+        localStorage.setItem("user_full_name", result.data.full_name);
+        localStorage.setItem("user_phone_number", result.data.phone_number);
         console.log("alala the greatest: ", result.data.user_id);
         const alala = localStorage.getItem("user_id_local");
+
         console.log("alala the greatest: ", alala);
         navigate("/"); // This will redirect the user to the "/" route
       } else {
