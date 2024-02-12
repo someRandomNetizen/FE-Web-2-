@@ -46,6 +46,8 @@ const useStyles = makeStyles({
     textAlign: "left", // Align the text to the left
     paddingBottom: 5,
     fontWeight: 500,
+    paddingLeft: 10,
+    textAlign: "justify",
   },
   blackText3: {
     fontWeight: 500,
@@ -68,6 +70,7 @@ const useStyles = makeStyles({
     paddingBottom: 15,
     flex: 1,
     marginLeft: 40,
+    paddingTop: 40,
   },
   blackTextContainer2: {
     marginTop: -20,
@@ -107,8 +110,14 @@ const useStyles = makeStyles({
   containerPro: {
     alignItems: "center",
     alignContent: "center",
-    display: "flex",
   },
+  latest: {
+    whiteSpace: "pre-line",
+    color: "black",
+    fontWeight: "bold", // Add bold style for emphasis
+    fontSize: "1.0rem", // Increase font size slightly
+    marginBottom: "8px", // Add some bottom margin for spacing
+  }
 });
 
 export default useStyles;

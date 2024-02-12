@@ -67,6 +67,16 @@ function Home() {
           console.log("long: ", longitude);
           console.log("dumdum: ", dumdum);
 
+          const response = await axios.get(
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyCNrHal_gkT6ojR3jzYO7K1CyqUups_JuY`
+          );
+
+          const address = response.data.results[0].formatted_address;
+
+          console.log("Address of User is: ", address);
+
+          localStorage.setItem("address_of_user", address);
+
           setCoordinates({ latitude, longitude });
           try {
             const response = await axios.post(

@@ -260,7 +260,7 @@ function FindOrder() {
   };
 
   if (isReceive) {
-    console.log("the money is in the bag");
+    console.log("the money is in the bag", isReceive);
   }
 
   return (

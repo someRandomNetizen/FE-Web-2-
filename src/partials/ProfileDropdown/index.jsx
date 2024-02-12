@@ -83,7 +83,6 @@ export default function UserProfile() {
               <p className="text-center mb-2" style={{ marginBottom: 5 }}>
                 {lovely ? phone_number_driver : user_phone_number}
               </p>
-
               <hr style={{ color: "blue" }} />
 
               <p

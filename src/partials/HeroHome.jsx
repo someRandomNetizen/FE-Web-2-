@@ -5,8 +5,36 @@ import { Link, useNavigate } from "react-router-dom";
 // import { recShipment } from "../actions/authAction
 import HeroImage from "../images/hero-image-02.png";
 import axios from "axios";
+import ShipmentDialog from "../component/ShipmentDialog/ShipmentDialog";
+import AcceptDialog from "../component/AcceptDialog/AcceptDialog";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import socket from "../component/socket";
+import { recShipment } from "../actions/authActions";
 
 function HeroHome() {
+  const dispatch = useDispatch();
+
+  const dumdum = useSelector((state) => state.auth.driverID.driver_id);
+
+  socket.on("recShipment", ({ state, driver_id, user_id, shipment_id }) => {
+    if (dumdum == driver_id && state == 0) {
+      localStorage.setItem("user_id_socket", user_id);
+      localStorage.setItem("shipment_id_socket", shipment_id);
+
+      dispatch(recShipment());
+      console.log("Test socket on:", shipment_id);
+    }
+  });
+
+  socket.on("moving", ({ isMoving, driver_id, latitude, longtitude }) => {
+    if (dumdum == driver_id) {
+      console.log("Test socket moving on socket:", isMoving);
+    }
+  });
+
+  console.log("beautiful2:", dumdum);
+
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const video = useRef(null);
   const navigate = useNavigate();
@@ -16,30 +44,41 @@ function HeroHome() {
   const [description, setDescription] = useState(""); // Set the initial value as needed
   const [defaultDirectory, setDefaultDirectory] = useState(""); // Set the initial value as needed
 
-  useEffect(() => {
-    videoModalOpen ? video.current.play() : video.current.pause();
-  }, [videoModalOpen]);
+  const [shipmentDialogOpen, setShipmentDialogOpen] = useState(true);
+  const isReceive = useSelector((state) => state.auth.recShipment);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://a0cc-14-161-38-9.ngrok-free.app/api/ShowRecord11",
-          {
-            headers: {
-              "ngrok-skip-browser-warning": "69420",
-            },
-          }
-        );
-        console.log("the result of api is: ", response);
-        console.log("the result of api data is: ", response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    console.log("here is api: ");
-    fetchData();
-  }, []);
+    console.log("come here darling ", isReceive);
+  }, [isReceive]);
+
+  const handleShipmentDialogClose = () => {
+    setShipmentDialogOpen(false);
+  };
+
+  // useEffect(() => {
+  //   videoModalOpen ? video.current.play() : video.current.pause();
+  // }, [videoModalOpen]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "https://a0cc-14-161-38-9.ngrok-free.app/api/ShowRecord11",
+  //         {
+  //           headers: {
+  //             "ngrok-skip-browser-warning": "69420",
+  //           },
+  //         }
+  //       );
+  //       console.log("the result of api is: ", response);
+  //       console.log("the result of api data is: ", response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+  //   console.log("here is api: ");
+  //   fetchData();
+  // }, []);
 
   const handleSearch = () => {
     if (!JWT) {
@@ -200,6 +239,15 @@ function HeroHome() {
             </Modal>
           </div>
         </div>
+        {isReceive && (
+          <AcceptDialog
+            open={shipmentDialogOpen}
+            onClose={handleShipmentDialogClose}
+            // onConfirm={handleConfirmShipment}
+            // message={shipmentDialogMessage}
+            // amount={totalAmount}
+          />
+        )}
       </div>
     </section>
   );

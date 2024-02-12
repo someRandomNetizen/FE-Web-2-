@@ -355,6 +355,7 @@ import PageIllustration from "../../partials/PageIllustration";
 import final from "../../images/final.jpg";
 
 function Checkout() {
+  const address = localStorage.getItem("chosen_address");
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const classes = useStyles();
@@ -394,6 +395,7 @@ function Checkout() {
     const distance = localStorage.getItem("distance");
     const rating = localStorage.getItem("rating");
     const Authorization = localStorage.getItem("JWT");
+    const address = localStorage.getItem("chosen_address");
 
     console.log("here jwt: ", Authorization);
 
@@ -408,6 +410,8 @@ function Checkout() {
 
     const stateDriver = 0;
     const kindOfShipment = 1;
+
+    const user_id = localStorage.getItem("user_id_local");
 
     try {
       const response = await axios.post(
@@ -448,12 +452,41 @@ function Checkout() {
       );
 
       if (response.status === 201) {
+        const testResult = {
+          senderName: user_name,
+          senderPhone: phoneNumber,
+          typeOfShipment: location.state.message,
+          fee: money,
+          time: formattedDate,
+          manual: formattedTime,
+          payment: stateDriver,
+          voucher: kindOfShipment,
+          driver: [
+            {
+              full_name: driver_name,
+              phone_number: phone_number_driver,
+              rating: rating,
+              userOpinion: distance,
+            },
+          ],
+          recAddress: [
+            {
+              name: "",
+            },
+          ],
+          senderAddress: [
+            {
+              name: "",
+            },
+          ],
+        };
+        console.log("Result sent to database: ", testResult);
         socket.emit(
           "recShipment",
           {
             state: 0,
             driver_id: chosen_driver_id,
-            user_id: 1,
+            user_id: user_id,
             shipment_id: response.data,
           },
           (response) => {
@@ -529,25 +562,56 @@ function Checkout() {
         <div className={classes.pageContainer}>
           <div className={classes.heading}>Xác nhận và hoàn tất</div>
           <div className={classes.contentContainer}>
+            <div style={{ paddingLeft: 175 }}>
+              <img
+                style={{
+                  width: "300px",
+                  height: "250px",
+                }}
+                src={final}
+                alt="Final Image"
+              />
+            </div>
             <div className={classes.blackTextContainer}>
-              <p className={classes.blackText3}>
-                Thợ yêu cầu:{" "}
+              <p className={classes.latest}>
+                Thợ yêu cầu:
                 <span className={classes.blackText2}>Sáu Thiện Nhân</span>
               </p>
-              <div className={classes.containerPro}>
+              {/* <p className={classes.blackText3}>
+                Địa chỉ làm việc:
+                <span className={classes.blackText2}>{address}</span>
+              </p> */}
+
+              {/* <div className={classes.containerPro}>
                 <div style={{ width: "20%" }}>
                   <p className={classes.blackText3}>Địa chỉ làm việc:</p>
                 </div>
-                <div style={{ paddingLeft: 30 }}>
-                  <span className={classes.blackText2}>
-                    {" "}
-                    VR93+JH4 Khu phố 6 Thủ Đức Thành phố Hồ Chí Minh Việt Nam
-                  </span>
+                <div
+                  style={{
+                    paddingLeft: 30,
+                  }}
+                >
+                  <span className={classes.blackText2}>{address}</span>
+                </div>
+              </div> */}
+
+              <div className={classes.containerPro}>
+                <div style={{ width: "100%" }}>
+                  <p className={classes.latest}>Địa chỉ làm việc:</p>
+                </div>
+                <div>
+                  <Typography
+                    gutterBottom
+                    style={{ whiteSpace: "pre-line", color: "black" }}
+                  >
+                    {address}
+                  </Typography>
                 </div>
               </div>
+
               <div className={classes.containerPro}>
-                <div style={{ width: "20%" }}>
-                  <p className={classes.blackText3}>Công việc yêu cầu: </p>
+                <div style={{ width: "100%" }}>
+                  <p className={classes.latest}>Công việc yêu cầu: </p>
                 </div>
                 <div>
                   <Typography
@@ -559,33 +623,51 @@ function Checkout() {
                 </div>
               </div>
 
+              <div
+                style={{
+                  borderColor: "blue",
+                  borderWidth: 1,
+
+                  marginTop: 5,
+                  marginBottom: 5,
+                }}
+              >
+                <Typography
+                  gutterBottom
+                  style={{
+                    whiteSpace: "pre-line",
+                    color: "black",
+                    paddingLeft: 5,
+                    paddingRight: 5,
+                  }}
+                >
+                  Hoặc chọn thêm
+                  <Link to="/booking" style={{ color: "blue" }}>
+                    {" "}
+                    Dịch Vụ
+                  </Link>
+                </Typography>
+              </div>
               <Typography
                 gutterBottom
                 style={{ whiteSpace: "pre-line", color: "black" }}
               >
-                Hoặc chọn thêm
-                <Link to="/booking" style={{ color: "blue" }}>
-                  {" "}
-                  Dịch Vụ
-                </Link>
+                <span className={classes.latest}>Phí di chuyển</span>: 0VND
+              </Typography>
+
+              <Typography
+                gutterBottom
+                style={{ whiteSpace: "pre-line", color: "black" }}
+              >
+                <span className={classes.latest}>Phí dịch vụ</span>:{" "}
+                {160 * location.state.amount}.000 VND
               </Typography>
               <Typography
                 gutterBottom
                 style={{ whiteSpace: "pre-line", color: "black" }}
               >
-                Phí di chuyển: 0VND
-              </Typography>
-              <Typography
-                gutterBottom
-                style={{ whiteSpace: "pre-line", color: "black" }}
-              >
-                Phí dịch vụ: {160 * location.state.amount}.000 VND
-              </Typography>
-              <Typography
-                gutterBottom
-                style={{ whiteSpace: "pre-line", color: "black" }}
-              >
-                Tổng phí dịch vụ: {160 * location.state.amount}.000 VND
+                <span className={classes.latest}>Tổng phí dịch vụ</span>:{" "}
+                {160 * location.state.amount}.000 VND
               </Typography>
               <Typography
                 gutterBottom
@@ -608,15 +690,17 @@ function Checkout() {
                 Giờ bắt đầu:{" "}
                 {selectedTime ? selectedTime.$d.toLocaleTimeString() : ""}
               </Typography>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["TimePicker"]}>
-                  <TimePicker
-                    label="Basic time picker"
-                    value={selectedTime}
-                    onChange={handleTimeChange}
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
+              <div>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["TimePicker"]}>
+                    <TimePicker
+                      label="Basic time picker"
+                      value={selectedTime}
+                      onChange={handleTimeChange}
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+              </div>
               <Typography
                 gutterBottom
                 style={{
@@ -639,7 +723,7 @@ function Checkout() {
               style={{
                 display: "flex",
                 justifyContent: "flex-end",
-                paddingTop: 15,
+                paddingTop: 55,
                 marginRight: 30,
                 paddingBottom: 15,
               }}

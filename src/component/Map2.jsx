@@ -512,21 +512,21 @@ export default function Map2() {
     libraries: ["places"],
   });
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const dumdum = useSelector((state) => state.auth.driverID.driver_id);
+  // const dumdum = useSelector((state) => state.auth.driverID.driver_id);
 
-  socket.on("recShipment", ({ state, driver_id, user_id, shipment_id }) => {
-    if (dumdum == driver_id && state == 0) {
-      localStorage.setItem("user_id_socket", user_id);
-      localStorage.setItem("shipment_id_socket", shipment_id);
+  // socket.on("recShipment", ({ state, driver_id, user_id, shipment_id }) => {
+  //   if (dumdum == driver_id && state == 0) {
+  //     localStorage.setItem("user_id_socket", user_id);
+  //     localStorage.setItem("shipment_id_socket", shipment_id);
 
-      dispatch(recShipment());
-      console.log("Test socket on:", driver_id);
-    }
-  });
+  //     dispatch(recShipment());
+  //     console.log("Test socket on:", shipment_id);
+  //   }
+  // });
 
-  console.log("beautiful2:", dumdum);
+  // console.log("beautiful2:", dumdum);
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
@@ -644,15 +644,18 @@ function Map() {
       title: coordinate.title,
     });
 
-    //const [selectedMarkerAddress, setSelectedMarkerAddress] = useState("");
+    // The code below get the address of chosen driver, but the google api has to be config correctly
 
-    const response = await axios.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinate.latitude},${coordinate.longitude}&key=AIzaSyCNrHal_gkT6ojR3jzYO7K1CyqUups_JuY`
-    );
+    // const response = await axios.get(
+    //   `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinate.latitude},${coordinate.longitude}&key=AIzaSyCNrHal_gkT6ojR3jzYO7K1CyqUups_JuY`
+    // );
 
-    const address = response.data.results[0].formatted_address;
+    // const address = response.data.results[0].formatted_address;
 
-    console.log("Marker clicked address: ", address);
+    // console.log("Marker clicked address is: ", address);
+
+    // localStorage.setItem("chosen_address", address);
+
     try {
       const response = await axios.get(
         `https://365truck.fdssoft.com/api/showDriver/`

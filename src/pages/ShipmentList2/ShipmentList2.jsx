@@ -197,13 +197,21 @@ function ShipmentList2() {
                       <p className={classes.lineText}>Trạng Thái</p>
                     </div>
                     <div className={classes.div4}>
-                      <p>
-                        {" "}
+                      <p
+                        style={{
+                          color:
+                            item.payment === "0"
+                              ? "orange"
+                              : item.payment === "1"
+                              ? "green"
+                              : "red",
+                        }}
+                      >
                         {item.payment === "0"
                           ? "Chờ xác nhận"
                           : item.payment === "1"
                           ? "Thợ xác nhận"
-                          : "Unknown"}
+                          : "Từ chối"}
                       </p>
                     </div>
                     {/* <p>{item.voucher}</p> */}
